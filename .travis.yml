@@ -5,4 +5,8 @@ install:
 - pip install awscli
 script:
 - aws s3 sync _site s3://pre-v1.frictionlessdata.io
-
+env:
+  global:
+  - secure: bMzhal+QQr3QreFZE+5SS+G6Icow0HBBlmVJJqPkFku0OtiyH6fS4J77a4ow4G6CI1lleJEbDaWEhBjEpmFKrRzauQRRsbzU6TFB/PQZHwwNHXCvJ3l+g5DMigysHn/tS+uD/3jM49WgkrrJj2EPjX/Mj+pAI7VqyJJvvuEeU0U=
+  - secure: A/8DIzDQZe+jYFziuRcGd/wiDJOdPlBufNMupupsghZc3DDoIGE+vKrnA858Aq/010CyGyuMh3IFDwmyUHcJgivzPlfqJmGxx+uy6ZdgFgCkQ35lZ8jiODJQ/U7kC7lFw03GjQ+FLSQ6/YsLMDIaftQCgWcYLAW1vwvkPwZEVSc=
+  - secure: gFTDQSSVtTGpCnemuZZuFknqPVbVv2sojNC+fgYUIQxxDLLR51hFnOIEKZP5YO57efLQ+Y9WmTIJWv0RPU+8eTclW5G2hSKI+YC3TDDqLcJ8jfliNNIBlqf/g6gaORKoBlqRzjyMW6++HdsyCKFkMrpQHYSmInEIjKRAcFTSme8=
