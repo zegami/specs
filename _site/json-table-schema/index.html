@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title> 
+    JSON Table Schema - Frictionless Data - Open Knowledge International
+  </title>
+  <meta name="author" content="Open Knowledge International and others">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="//netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+  <link href="/css/style.css" rel="stylesheet" />
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-static-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/">
+        <img src="/img/frictionless-data.png" alt="" />
+        Frictionless Data
+        <small>Specifications</small>
+      </a>
+      <ul class="nav pull-right">
+        <li class="divider-vertical"></li>
+        <li class="dropdown">
+	  <a class="dropdown-toggle" data-toggle="dropdown" href="#">Specifications <b class="caret"></b></a>
+   	  <ul class="dropdown-menu">
+	    <li><a href="/data-packages">Data Packages</a></li>
+<li><a href="/json-table-schema">JSON Table Schema</a></li>
+<li><a href="/csv-dialect">CSV Dialect Description</a></li>
+<li><a href="/data-package-identifier">Data Package Identifiers</a></li>
+<li><a href="/tabular-data-package">Tabular Data Package</a></li>
+<li><a href="/fiscal-data-package">Fiscal Data Package</a></li>
+
+
+          </ul>
+        </li>
+        <li class="divider-vertical"></li>
+        <li>
+          <a href="http://frictionlessdata.io" title="Main Site">Main Site</a>
+        </li>        
+	
+        <li class="divider-vertical"></li>
+        <li>
+          <a href="https://discuss.okfn.org/c/frictionless-data" title="Join the discussion">Forum</a>
+        </li>
+	
+        <li class="divider-vertical"></li>
+        <li>
+          <a href="https://github.com/frictionlessdata/specs/issues" title="Report issues, suggestions and improvements">Issue Tracker</a>
+        </li>
+        <li class="divider-vertical"></li>
+        <li>
+          <a href="https://github.com/frictionlessdata/specs" title="Fork and pull to submit new material or corrections">Repo</a>
+        </li>
+	
+        <li class="divider-vertical"></li>
+        <li>
+          <a href="https://twitter.com/OKFNLabs">Twitter</a>
+        </li>
+	
+        <li class="divider-vertical"></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="content">
+    <div class="row">
+      <div class="span6 offset3">
+        <div class="banner page-header">
+          <h1>
+            JSON Table Schema
+            
+          </h1>
+        </div>
+
+        
+  
+  
+
+
+
+
+
+  <p><p>This RFC defines a simple schema for tabular data. The schema is designed to be expressible in JSON.</p>
+</p>
+
+
+<table class="table table-striped meta">
+  
+  
+    <tr><td>Version</td><td>1.0-pre15</td></tr>
+  
+  
+    <tr><td>Last Updated</td><td>17 November 2016</td></tr>
+  
+  
+    <tr><td>Created</td><td>12 November 2012</td></tr>
+  
+</table>
+
+
+
+
+  
+  <h1 id="language">Language</h1>
+
+<p>The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this document are to be interpreted as described in <a href="https://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>.</p>
+
+
+
+
+
+
+<h3 id="changelog">Changelog</h3>
+
+<ul>
+  <li>1.0.0-pre15: add calendar units <code class="highlighter-rouge">gyear</code> and <code class="highlighter-rouge">gyearmonth</code> (<a href="https://github.com/dataprotocols/dataprotocols/issues/105">#105</a>), tweak pattern support for date/time types <a href="https://github.com/frictionlessdata/specs/issues/260">#260</a></li>
+  <li>1.0.0-pre14: add support for <code class="highlighter-rouge">missingValue</code> (<a href="https://github.com/dataprotocols/dataprotocols/issues/97">#97</a>)</li>
+  <li>1.0.0-pre13: remove <code class="highlighter-rouge">null</code> datatype (<a href="https://github.com/dataprotocols/dataprotocols/issues/262">#262</a>)</li>
+  <li>1.0.0-pre12: add support for new number properties such as <code class="highlighter-rouge">decimalChar</code>(<a href="https://github.com/dataprotocols/dataprotocols/issues/246">#246</a>)</li>
+  <li>1.0.0-pre11: add new field property: rdfType (<a href="https://github.com/dataprotocols/dataprotocols/issues/217">#217</a>)</li>
+  <li>1.0.0-pre10: add new field types: duration (<a href="https://github.com/dataprotocols/dataprotocols/issues/210">#210</a>)</li>
+  <li>1.0.0-pre9: make date formats stricter for default
+<a href="https://github.com/dataprotocols/dataprotocols/issues/104">issue</a>. Define
+value of fmt:PATTERN for dates
+<a href="https://github.com/dataprotocols/dataprotocols/issues/200">issue</a></li>
+  <li>1.0-pre8: Rename contraints.oneOf to contraints.enum <a href="https://github.com/dataprotocols/dataprotocols/issues/191">issue</a></li>
+  <li>1.0-pre7: Add contraints.oneOf <a href="https://github.com/dataprotocols/dataprotocols/issues/175">issue</a></li>
+  <li>1.0-pre6: clarify types and formats
+<a href="https://github.com/dataprotocols/dataprotocols/issues/159">issue</a></li>
+  <li>1.0-pre5: add type validation
+<a href="https://github.com/dataprotocols/dataprotocols/issues/95">issue</a></li>
+  <li>1.0-pre4: add foreign key support - see this
+<a href="https://github.com/dataprotocols/dataprotocols/issues/23">issue</a></li>
+  <li>1.0-pre3.2: add primary key support (see this
+  <a href="https://github.com/dataprotocols/dataprotocols/issues/21">issue</a>)</li>
+  <li>1.0-pre3.1: breaking changes.
+    <ul>
+      <li><code class="highlighter-rouge">label</code> (breaking) changed to <code class="highlighter-rouge">title</code> - see <a href="https://github.com/dataprotocols/dataprotocols/issues/46">Closer alignment with JSON
+Schema</a></li>
+      <li><code class="highlighter-rouge">id</code> changed to <code class="highlighter-rouge">name</code> (with slight alteration in semantics - i.e. SHOULD
+be unique but no longer MUST be unique)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 class="no_toc" id="table-of-contents">Table of Contents</h3>
+
+<ul id="markdown-toc">
+  <li><a href="#changelog" id="markdown-toc-changelog">Changelog</a></li>
+  <li><a href="#concepts" id="markdown-toc-concepts">Concepts</a></li>
+  <li><a href="#specification" id="markdown-toc-specification">Specification</a>    <ul>
+      <li><a href="#schema" id="markdown-toc-schema">Schema</a></li>
+      <li><a href="#field-descriptors" id="markdown-toc-field-descriptors">Field Descriptors</a>        <ul>
+          <li><a href="#field-constraints" id="markdown-toc-field-constraints">Field Constraints</a></li>
+          <li><a href="#field-types-and-formats" id="markdown-toc-field-types-and-formats">Field Types and Formats</a>            <ul>
+              <li><a href="#string" id="markdown-toc-string">string</a></li>
+              <li><a href="#number" id="markdown-toc-number">number</a></li>
+              <li><a href="#integer" id="markdown-toc-integer">integer</a></li>
+              <li><a href="#boolean" id="markdown-toc-boolean">boolean</a></li>
+              <li><a href="#object" id="markdown-toc-object">object</a></li>
+              <li><a href="#array" id="markdown-toc-array">array</a></li>
+              <li><a href="#date" id="markdown-toc-date">date</a></li>
+              <li><a href="#gyear" id="markdown-toc-gyear">gyear</a></li>
+              <li><a href="#gyearmonth" id="markdown-toc-gyearmonth">gyearmonth</a></li>
+              <li><a href="#duration" id="markdown-toc-duration">duration</a></li>
+              <li><a href="#geopoint" id="markdown-toc-geopoint">geopoint</a></li>
+              <li><a href="#geojson" id="markdown-toc-geojson">geojson</a></li>
+              <li><a href="#any" id="markdown-toc-any">any</a></li>
+            </ul>
+          </li>
+          <li><a href="#missing-values" id="markdown-toc-missing-values">Missing Values</a></li>
+          <li><a href="#rich-field-types" id="markdown-toc-rich-field-types">Rich Field Types</a></li>
+        </ul>
+      </li>
+      <li><a href="#primary-key" id="markdown-toc-primary-key">Primary Key</a></li>
+      <li><a href="#foreign-keys" id="markdown-toc-foreign-keys">Foreign Keys</a></li>
+    </ul>
+  </li>
+  <li><a href="#appendix-related-work" id="markdown-toc-appendix-related-work">Appendix: Related Work</a>    <ul>
+      <li><a href="#dspl" id="markdown-toc-dspl">DSPL</a></li>
+      <li><a href="#google-bigquery" id="markdown-toc-google-bigquery">Google BigQuery</a></li>
+      <li><a href="#xml-schema" id="markdown-toc-xml-schema">XML Schema</a></li>
+      <li><a href="#type-lists" id="markdown-toc-type-lists">Type Lists</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="concepts">Concepts</h1>
+
+<p>A Table consists of a set of rows. Each row has a set of fields
+(columns). We usually expect that each Row has the same set of fields
+and thus we can talk about <em>the</em> fields for the table as a whole.</p>
+
+<p>In cases of tables in spreadsheets or CSV files we often interpret the
+first row as a header row giving the names of the fields. By contrast,
+in other situations, e.g. tables in SQL databases the fields (columns)
+are explicitly designated.</p>
+
+<p>To illustrate here’s a classic spreadsheet table:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>field     field
+  |         |
+  |         |
+  V         V
+
+ A     |    B    |    C    |    D      &lt;--- Row
+ ------------------------------------
+ valA  |   valB  |  valC   |   valD    &lt;--- Row
+ ...
+</code></pre>
+</div>
+
+<p>In JSON a table would be:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[
+  { "A": value, "B": value, ... },
+  { "A": value, "B": value, ... },
+  ...
+]
+</code></pre>
+</div>
+
+<h1 id="specification">Specification</h1>
+
+<p>A JSON Table Schema consists of:</p>
+
+<ul>
+  <li>a required list of <em>field descriptors</em></li>
+  <li>optionally, a <em>primary key</em> description</li>
+  <li>optionally, a <em>foreign _key</em> description</li>
+</ul>
+
+<p>A schema is described using JSON. This might exist as a standalone document
+or may be embedded within another JSON structure, e.g. as part of a
+data package description.</p>
+
+<h2 id="schema">Schema</h2>
+
+<p>A schema has the following structure:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="err">#</span><span class="w"> </span><span class="err">fields</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="err">an</span><span class="w"> </span><span class="err">ordered</span><span class="w"> </span><span class="err">list</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">field</span><span class="w"> </span><span class="err">descriptors</span><span class="w">
+  </span><span class="err">#</span><span class="w"> </span><span class="err">one</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">each</span><span class="w"> </span><span class="err">field</span><span class="w"> </span><span class="err">(column)</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">table</span><span class="w">
+  </span><span class="nt">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="err">#</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">field-descriptor</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name of field (e.g. column name)"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A nicer human readable label or title for the field"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A string specifying the type"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A string specifying a format"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A description for the field"</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">...</span><span class="w"> </span><span class="err">more</span><span class="w"> </span><span class="err">field</span><span class="w"> </span><span class="err">descriptors</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="err">#</span><span class="w"> </span><span class="err">(optional)</span><span class="w"> </span><span class="err">specification</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">primary</span><span class="w"> </span><span class="err">key</span><span class="w">
+  </span><span class="nt">"primaryKey"</span><span class="p">:</span><span class="w"> </span><span class="err">...</span><span class="w">
+  </span><span class="err">#</span><span class="w"> </span><span class="err">(optional)</span><span class="w"> </span><span class="err">specification</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">foreign</span><span class="w"> </span><span class="err">keys</span><span class="w">
+  </span><span class="s2">"foreignKeys"</span><span class="err">:</span><span class="w"> </span><span class="err">...</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>That is, a JSON Table Schema is:</p>
+
+<ul>
+  <li>a Hash which <code class="highlighter-rouge">MUST</code> contain a key <code class="highlighter-rouge">fields</code></li>
+  <li><code class="highlighter-rouge">fields</code> MUST be an array where each entry in the array is a field
+descriptor. (Structure and usage described below)</li>
+  <li>the Hash <code class="highlighter-rouge">MAY</code> contain a property <code class="highlighter-rouge">primaryKey</code> (structure and usage
+specified below)</li>
+  <li>the Hash <code class="highlighter-rouge">MAY</code> contain a property <code class="highlighter-rouge">foreignKeys</code> (structure and usage
+specified below)</li>
+  <li>the Hash <code class="highlighter-rouge">MAY</code> contain any number of other properties (not defined in this
+spec)</li>
+</ul>
+
+<h2 id="field-descriptors">Field Descriptors</h2>
+
+<p>A field descriptor is a simple JSON hash that describes a single field. The
+descriptor provides additional human-readable documentation for a field, as
+well as additional information that may be used to validate the field or create
+a user interface for data entry.</p>
+
+<p>At a minimum a field descriptor will contain at least a <code class="highlighter-rouge">name</code> key, but MAY
+have additional keys as described below:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name of field (e.g. column name)"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A nicer human readable label or title for the field"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A string specifying the type"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A string specifying a format"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"missingValue"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A description for the field"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"constraints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="err">#</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">constraints-descriptor</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<ul>
+  <li>a field descriptor MUST be a Hash</li>
+  <li>the field descriptor Hash MUST contain a <code class="highlighter-rouge">name</code> property. This
+property <code class="highlighter-rouge">SHOULD</code> correspond to the name of field/column in the
+data file (if it has a name). As such it <code class="highlighter-rouge">SHOULD</code> be unique (though
+it is possible, but very bad practice, for the data file to have
+multiple columns with the same name). Additionally, <code class="highlighter-rouge">name</code> <code class="highlighter-rouge">SHOULD</code>
+be considered case sensitive. In practice, case sensitivity for names
+can be limiting in certain scenarios, so consumers <code class="highlighter-rouge">MAY</code> choose to ignore
+case sensitivity for <code class="highlighter-rouge">name</code> values.</li>
+  <li>the field descriptor Hash MAY contain any number of other properties</li>
+  <li>
+    <p>specific properties that MAY be included in the Hash and whose
+meaning is defined in this spec are:</p>
+
+    <ul>
+      <li><code class="highlighter-rouge">title</code>: A nicer human readable label or title for the field</li>
+      <li><code class="highlighter-rouge">description</code>: A description for this field e.g. “The recipient of
+the funds”</li>
+      <li><code class="highlighter-rouge">type</code>: The type of the field (string, number etc) - see below for
+more detail. If type is not provided a consumer should assume a type of
+“string”.</li>
+      <li><code class="highlighter-rouge">format</code>: A description of the format e.g. “DD.MM.YYYY” for a
+date. See below for more detail.</li>
+      <li><code class="highlighter-rouge">missingValue</code>: a field value which should be interpreted as missing data (<code class="highlighter-rouge">null</code>). See below for</li>
+      <li><code class="highlighter-rouge">constraints</code>: A constraints descriptor that can be used by consumers
+to validate field values</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="field-constraints">Field Constraints</h3>
+
+<p>A set of constraints can be associated with a field. These constraints can be used
+to validate data against a JSON Table Schema. The constraints might be used by consumers
+to validate, for example, the contents of a data package, or as a means to validate
+data being collected or updated via a data entry interface.</p>
+
+<p>A constraints descriptor is a JSON hash. It <code class="highlighter-rouge">MAY</code> contain any of the following
+keys.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">required</code> – A boolean value which indicates whether a field must have a value
+in every row of the table. An empty string is considered to be a missing value.</li>
+  <li><code class="highlighter-rouge">minLength</code> – An integer that specifies the minimum length of a value. Supported field types are sequences, such as <code class="highlighter-rouge">string</code> and <code class="highlighter-rouge">array</code>, and collections containing items, such as <code class="highlighter-rouge">object</code>.</li>
+  <li><code class="highlighter-rouge">maxLength</code> – An integer that specifies the maximum length of a value. Supported field types are sequences, such as <code class="highlighter-rouge">string</code> and <code class="highlighter-rouge">array</code>, and collections containing items, such as <code class="highlighter-rouge">object</code>.</li>
+  <li><code class="highlighter-rouge">unique</code> – A boolean. If <code class="highlighter-rouge">true</code>, then all values for that field MUST be unique within the
+data file in which it is found. This defines a unique key for a row although a row could
+potentially have several such keys.</li>
+  <li><code class="highlighter-rouge">pattern</code> – A regular expression that can be used to test field values. If the regular
+expression matches then the value is valid. Values will be treated as a string of characters.
+It is recommended that values of this field conform to the standard
+<a href="http://www.w3.org/TR/xmlschema-2/#regexs">XML Schema regular expression syntax</a>. See also
+<a href="http://www.regular-expressions.info/xml.html">this reference</a>.</li>
+  <li><code class="highlighter-rouge">minimum</code> – specifies a minimum value for a field. This is different to <code class="highlighter-rouge">minLength</code> which
+checks the number of items in the value. A <code class="highlighter-rouge">minimum</code> value constraint checks whether a field value is greater than or equal to the specified value. The range checking depends on the <code class="highlighter-rouge">type</code> of the field. E.g. an integer field may have a minimum value of 100; a date field might have a minimum date. If a <code class="highlighter-rouge">minimum</code> value constraint is specified then the field descriptor <code class="highlighter-rouge">MUST</code> contain a <code class="highlighter-rouge">type</code> key. Supported field types are <code class="highlighter-rouge">integer</code>, <code class="highlighter-rouge">number</code>, <code class="highlighter-rouge">date</code>, <code class="highlighter-rouge">time</code> and <code class="highlighter-rouge">datetime</code>.</li>
+  <li><code class="highlighter-rouge">maximum</code> – as above, but specifies a maximum value for a field.</li>
+  <li><code class="highlighter-rouge">enum</code> – An array of values, where each value <code class="highlighter-rouge">MUST</code> comply with the type and format of the field.
+The field value must exactly match a value in the <code class="highlighter-rouge">enum</code> array.</li>
+</ul>
+
+<p>The constraints listed above may also define a list of supported field types. Implementations <code class="highlighter-rouge">SHOULD</code> report an error if an attempt is made to evaluate a value against an unsupported constraint.</p>
+
+<p>A constraints descriptor may contain multiple constraints, in which case a consumer <code class="highlighter-rouge">MUST</code> apply
+all the constraints when determining if a field value is valid.</p>
+
+<p>A data file, e.g. an entry in a data package, is considered to be valid if all of its fields are valid
+according to their declared <code class="highlighter-rouge">type</code> and <code class="highlighter-rouge">constraints</code>.</p>
+
+<h3 id="field-types-and-formats">Field Types and Formats</h3>
+
+<p>A field’s <code class="highlighter-rouge">type</code> property is a string indicating the type of this field.</p>
+
+<p>A field’s <code class="highlighter-rouge">format</code> property is a string, being a keyword indicating a
+format for the field type.</p>
+
+<p>Both <code class="highlighter-rouge">type</code> and <code class="highlighter-rouge">format</code> are optional: in a field descriptor, the absence of a
+<code class="highlighter-rouge">type</code> property indicates that the field is of the type “string”, and the
+absence of a <code class="highlighter-rouge">format</code> property indicates that the field’s type <code class="highlighter-rouge">format</code> is
+“default”.</p>
+
+<p>Types are based on the <a href="http://tools.ietf.org/html/draft-zyp-json-schema-03#section-5.1">type set of
+json-schema</a>
+with some additions and minor modifications (cf other type lists include
+those in <a href="http://www.elasticsearch.org/guide/reference/mapping/">Elasticsearch
+types</a>).</p>
+
+<p>The type list with associated formats and other related properties is as
+follows.</p>
+
+<h4 id="string">string</h4>
+
+<p>The field contains strings, that is, sequences of characters.</p>
+
+<p><code class="highlighter-rouge">format</code>:</p>
+
+<ul>
+  <li><strong>default</strong>: any valid string.</li>
+  <li><strong>email</strong>: A valid email address.</li>
+  <li><strong>uri</strong>: A valid URI.</li>
+  <li><strong>binary</strong>: A base64 encoded string representing binary data.</li>
+  <li><strong>uuid</strong>: A string that is a uuid.</li>
+</ul>
+
+<h4 id="number">number</h4>
+
+<p>The field contains numbers of any kind including decimals.</p>
+
+<p>The lexical formatting follows that of decimal in <a href="https://www.w3.org/TR/xmlschema-2/#decimal">XMLSchema</a>: a
+non-empty finite-length sequence of decimal digits separated by a period as a
+decimal indicator. An optional leading sign is allowed. If the sign is omitted,
+“+” is assumed. Leading and trailing zeroes are optional. If the fractional
+part is zero, the period and following zero(es) can be omitted. For example:
+‘-1.23’, ‘12678967.543233’, ‘+100000.00’, ‘210’.</p>
+
+<p>The following special string values are permitted (case need not be respected):</p>
+
+<ul>
+  <li>NaN: not a number</li>
+  <li>INF: positive infinity</li>
+  <li>-INF: negative infinity</li>
+</ul>
+
+<p>A number MAY also have a trailing:</p>
+
+<ul>
+  <li>exponent: this MUST consist of an E followed by an optional + or - sign
+followed by one or more decimal digits (0-9)</li>
+  <li>percentage: the percentage sign: “%. In conversion percentages should be
+divided by 100.</li>
+</ul>
+
+<p>If both exponent and percentages are present the percentage MUST follow the
+exponent e.g. ‘53E10%’ (equals 5.3).</p>
+
+<p>This lexical formatting may be modified using these additional properties:</p>
+
+<ul>
+  <li><strong>decimalChar</strong>: A string whose value is used to represent a decimal point
+within the number. The default value is “.”.</li>
+  <li><strong>groupChar</strong>: A string whose value is used to group digits within the
+number. The default value is null. A common value is “,” e.g. “100,000”.</li>
+  <li><strong>currency</strong>: A number that may include additional currency symbols.</li>
+</ul>
+
+<p><code class="highlighter-rouge">format</code>: no options (other than the default).</p>
+
+<h4 id="integer">integer</h4>
+
+<p>The field contains integers - that is whole numbers.</p>
+
+<p>Integer values are indicated in the standard way for any valid integer.</p>
+
+<p><code class="highlighter-rouge">format</code>: no options (other than the default).</p>
+
+<h4 id="boolean">boolean</h4>
+
+<p>The field contains boolean (true/false) data.</p>
+
+<p>Boolean values can be indicated with the following strings (case-insensitive
+so, for example, “Y” and “y” are both acceptable):</p>
+
+<ul>
+  <li><strong>true</strong>: ‘yes’, ‘y’, ‘true’, ‘t’, ‘1’</li>
+  <li><strong>false</strong>: ‘no’, ‘n’, ‘false’, ‘f’, ‘0’</li>
+</ul>
+
+<p><code class="highlighter-rouge">format</code>: no options (other than the default).</p>
+
+<h4 id="object">object</h4>
+
+<p>The field contains data which is valid JSON.</p>
+
+<p><code class="highlighter-rouge">format</code>: no options (other than the default).</p>
+
+<h4 id="array">array</h4>
+
+<p>The field contains data that is a valid JSON format arrays.</p>
+
+<p><code class="highlighter-rouge">format</code>: no options (other than the default).</p>
+
+<h4 id="date">date</h4>
+
+<p><strong>datetime</strong>; <strong>date</strong>; <strong>time</strong></p>
+
+<p>Tthe field contains temporal values such as dates, times and date-times.</p>
+
+<p><code class="highlighter-rouge">format</code>: (<code class="highlighter-rouge">datetime</code>, <code class="highlighter-rouge">date</code> and <code class="highlighter-rouge">time</code> share the these same options)</p>
+
+<ul>
+  <li><strong>default</strong>: An ISO8601 format string.
+    <ul>
+      <li>date: This MUST be in ISO8601 format YYYY-MM-DD</li>
+      <li>datetime: a date-time. This MUST be in ISO 8601 format of YYYY-MM-DDThh:mm:ssZ in UTC time</li>
+      <li>time: a time without a date</li>
+    </ul>
+  </li>
+  <li><strong>any</strong>: Any parsable representation of the type. The implementing
+library can attempt to parse the datetime via a range of strategies.
+An example is <code class="highlighter-rouge">dateutil.parser.parse</code> from the <code class="highlighter-rouge">python-dateutils</code>
+library.</li>
+  <li><strong>{PATTERN}</strong>: date/time values in this field can be parsed according to
+<code class="highlighter-rouge"><span class="p">{</span><span class="err">PATTERN</span><span class="p">}</span></code>. <code class="highlighter-rouge"><span class="p">{</span><span class="err">PATTERN</span><span class="p">}</span></code> MUST follow the syntax of <a href="https://docs.python.org/2/library/datetime.html#strftime-strptime-behavior">standard Python / C
+strptime</a>. (That is, values in the this field should be parseable
+by Python / C standard <code class="highlighter-rouge">strptime</code> using <code class="highlighter-rouge">PATTERN</code>).  Example: <code class="highlighter-rouge">%d %b %y</code>
+would correspond to dates like: <code class="highlighter-rouge">30 Nov 14</code></li>
+</ul>
+
+<h4 id="gyear">gyear</h4>
+
+<p>A calendar year as per <a href="https://www.w3.org/TR/xmlschema-2/#gYear">XMLSchema <code class="highlighter-rouge">gYear</code></a>.</p>
+
+<p>Usual lexical reprentation is <code class="highlighter-rouge">YYYY</code>. There are no format options.</p>
+
+<h4 id="gyearmonth">gyearmonth</h4>
+
+<p>A specific month in a specific year as per <a href="https://www.w3.org/TR/xmlschema-2/#gYearMonth">XMLSchema
+<code class="highlighter-rouge">gYearMonth</code></a>.</p>
+
+<p>Usual lexical representation is: <code class="highlighter-rouge">YYYY-MM</code>. There are no format options.</p>
+
+<h4 id="duration">duration</h4>
+
+<p>A duration of time.</p>
+
+<p>The lexical representation for duration is the <a href="https://en.wikipedia.org/wiki/ISO_8601#Durations">ISO 8601</a>
+extended format PnYnMnDTnHnMnS, where nY represents the number of years, nM the
+number of months, nD the number of days, ‘T’ is the date/time separator, nH the
+number of hours, nM the number of minutes and nS the number of seconds. The
+number of seconds can include decimal digits to arbitrary precision. Date and
+time elements including their designator may be omitted if their value is zero,
+and lower order elements may also be omitted for reduced precision. Here we
+follow the definition of <a href="http://www.w3.org/TR/xmlschema-2/#duration">XML Schema duration datatype</a> directly
+and that definition is implicitly inlined here.</p>
+
+<p><code class="highlighter-rouge">format</code>: no options (other than the default).</p>
+
+<h4 id="geopoint">geopoint</h4>
+
+<p>The field contains data describing a geographic point.</p>
+
+<p><code class="highlighter-rouge">format</code>:</p>
+
+<ul>
+  <li><strong>default</strong>: A string of the pattern “lon, lat”, where <code class="highlighter-rouge">lon</code> is the longitude
+and <code class="highlighter-rouge">lat</code> is the latitude.</li>
+  <li><strong>array</strong>: An array of exactly two items, where each item is either a number,
+or a string parsable as a number, and the first item is <code class="highlighter-rouge">lon</code> and the second
+item is <code class="highlighter-rouge">lat</code>.</li>
+  <li><strong>object</strong>: A JSON object with exactly two keys, <code class="highlighter-rouge">lat</code> and <code class="highlighter-rouge">lon</code></li>
+</ul>
+
+<h4 id="geojson">geojson</h4>
+
+<p>The field contains a JSON object according to GeoJSON or TopoJSON spec.</p>
+
+<p><code class="highlighter-rouge">format</code>:</p>
+
+<ul>
+  <li><strong>default</strong>: A geojson object as per the <a href="http://geojson.org/">GeoJSON spec</a>.</li>
+  <li><strong>topojson</strong>: A topojson object as per the <a href="https://github.com/topojson/topojson-specification/blob/master/README.md">TopoJSON spec</a></li>
+</ul>
+
+<h4 id="any">any</h4>
+
+<p>Any <code class="highlighter-rouge">type</code> or <code class="highlighter-rouge">format</code> is accepted.</p>
+
+<h3 id="missing-values">Missing Values</h3>
+
+<p>By “missing” we simply mean null or “not present for whatever reason”. Many
+datasets arrive with missing data values, either because a value was not
+collected or it never existed.</p>
+
+<p>Missing values may be indicated simply by the value being empty in other cases
+a special value may have been used e.g. <code class="highlighter-rouge">-</code>, <code class="highlighter-rouge">NaN</code>, <code class="highlighter-rouge">0</code>, <code class="highlighter-rouge">-9999</code> etc.</p>
+
+<p>The <code class="highlighter-rouge">missingValue</code> property provides a way to indicate that these values should
+be interpreted as equivalent to null.</p>
+
+<p>Strings that indicate missing (null) data values for a field <code class="highlighter-rouge">MAY</code> be provided
+for a field using the the <code class="highlighter-rouge">missingValue</code> property.</p>
+
+<p>If present, the <code class="highlighter-rouge">missingValue</code> MUST be a single string or an array of strings,
+for example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>"missingValue": ""
+"missingValue": "-"
+"missingValue": ["Nan", "-"]
+</code></pre>
+</div>
+
+<p><strong>Note</strong>: <code class="highlighter-rouge">missingValue</code> are strings rather than being the data type of
+the particular field. This allows for comparison prior to casting and for
+fields to have missing value which are not of their type, for example a
+<code class="highlighter-rouge">number</code> field to have missing values indicated by <code class="highlighter-rouge">-</code>.</p>
+
+<p>The default value of <code class="highlighter-rouge">missingValue</code> for a non-string type field is the empty
+string <code class="highlighter-rouge">""</code>. For string type fields there is no default for <code class="highlighter-rouge">missingValue</code> (for
+string fields the empty string <code class="highlighter-rouge">""</code> is a valid value and need not indicate
+null).</p>
+
+<p><strong>Processing</strong>: if a missing value is encountered it SHOULD be converted into
+the NULL or equivalent value.</p>
+
+<h3 id="rich-field-types">Rich Field Types</h3>
+
+<p>A richer, “semantic”, description of the “type” of data in a given column MAY
+be provided using a <code class="highlighter-rouge">rdfType</code> property on a field descriptor.</p>
+
+<p>The value of of the <code class="highlighter-rouge">rdfType</code> property MUST be the URI of a RDF Class, that is an instance or subclass of <a href="https://www.w3.org/TR/rdf-schema/#ch_class">RDF Schema Class object</a></p>
+
+<p>Here is an example using the Schema.org RDF Class <code class="highlighter-rouge">http://schema.org/Country</code>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Country</th>
+      <th>Year Date</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>US</td>
+      <td>2010</td>
+      <td>…</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># JSON Table Schema
+{
+  fields: [
+    {
+      "name": "Country",
+      "type": "string",
+      "rdfType": "http://schema.org/Country"
+    }
+    ... 
+  }
+}
+</code></pre>
+</div>
+
+<h2 id="primary-key">Primary Key</h2>
+
+<p>A primary key is a field or set of fields that uniquely identifies each row in
+the table.</p>
+
+<p>The <code class="highlighter-rouge">primaryKey</code> entry in the schema Hash is optional. If present it specifies
+the primary key for this table.</p>
+
+<p>The <code class="highlighter-rouge">primaryKey</code>, if present, MUST be:</p>
+
+<ul>
+  <li>Either: an array of strings with each string corresponding to one of the
+field <code class="highlighter-rouge">name</code> values in the <code class="highlighter-rouge">fields</code> array (denoting that the primary key is
+made up of those fields). It is acceptable to have an array with a single
+value (indicating just one field in the primary key). Strictly, order of
+values in the array does not matter. However, it is RECOMMENDED that one
+follow the order the fields in the <code class="highlighter-rouge">fields</code> has as client applications may
+utitlize the order of the primary key list (e.g. in concatenating values
+together).</li>
+  <li>Or: a single string corresponding to one of the field <code class="highlighter-rouge">name</code> values in
+the <code class="highlighter-rouge">fields</code> array (indicating that this field is the primary key). Note that
+this version corresponds to the array form with a single value (and can be
+seen as simply a more convenient way of specifying a single field primary
+key).</li>
+</ul>
+
+<p>Here’s an example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>  "fields": [
+    {
+      "name": "a"
+    },
+    ...
+  ],
+  "primaryKey": "a"
+</code></pre>
+</div>
+
+<p>Here’s an example with an array primary key:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>"schema": {
+  "fields": [
+    {
+      "name": "a"
+    },
+    {
+      "name": "b"
+    },
+    {
+      "name": "c"
+    },
+    ...
+  ],
+  "primaryKey": ["a", "c"]
+ }
+</code></pre>
+</div>
+
+<h2 id="foreign-keys">Foreign Keys</h2>
+
+<div class="alert alert-success">
+Foreign Keys by necessity must be able to reference other data objects. These data objects require a specific structure for the spec to work. Therefore, this spec makes one of two assumptions:
+<ul>
+<li>Your Foreign Key points to another field/fields within the current JSON
+Table Schema. In this case you use a special <code>self</code> keyword is
+employed.</li>
+<li>Your Foreign Key points to a field/fields in a JSON Table Schema
+"elsewhere". In this case, the JSON Table Schema must be inside of a resource
+on <a href="/data-packages/">Data Package</a>. There are two situations here:
+EITHER this JSON Table Schema is already situated within a (Tabular) Data
+Package and the reference is to a resource within this Data Package; OR we are
+pointing out to a (Tabular) Data Package stored elsewhere e.g. online.</li>
+</ul>
+</div>
+
+<p>A foreign key is a reference where entries in a given field (or fields) on this
+table (‘resource’ in data package terminology) is a reference to an entry in a
+field (or fields) on a separate resource.</p>
+
+<p>The <code class="highlighter-rouge">foreignKeys</code> property, if present, <code class="highlighter-rouge">MUST</code> be an Array. Each entry in the
+array must be a <code class="highlighter-rouge">foreignKey</code>. A <code class="highlighter-rouge">foreignKey</code> <code class="highlighter-rouge">MUST</code> be a Hash and:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">MUST</code> have a property <code class="highlighter-rouge">fields</code>. <code class="highlighter-rouge">fields</code> is a string or array specifying the
+field or fields on this resource that form the source part of the foreign
+key. The structure of the string or array is as per <code class="highlighter-rouge">primaryKey</code> above.</li>
+  <li><code class="highlighter-rouge">MUST</code> have a property <code class="highlighter-rouge">reference</code> which MUST be a Hash. The Hash
+    <ul>
+      <li><code class="highlighter-rouge">MAY</code> have a property <code class="highlighter-rouge">datapackage</code>. This property is a string being a url
+pointing to a Data Package or is the name of a datapackage. If absent the
+implication is that this is a reference to a resource within the current
+data package or this is self-referencing foreign key.</li>
+      <li><code class="highlighter-rouge">MUST</code> have a property <code class="highlighter-rouge">resource</code> which is the name of the resource within
+the referenced data package. For self-referencing foreign keys, the value
+of <code class="highlighter-rouge">resource</code> <code class="highlighter-rouge">MUST</code> be <code class="highlighter-rouge">self</code>.</li>
+      <li><code class="highlighter-rouge">MUST</code> have a property <code class="highlighter-rouge">fields</code> which is a string if the outer <code class="highlighter-rouge">fields</code> is a
+string, else an array of the same length as the outer <code class="highlighter-rouge">fields</code>, describing the
+field (or fields) references on the destination resource. The structure of
+the string or array is as per <code class="highlighter-rouge">primaryKey</code> above.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Here’s an example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>  "fields": [
+    {
+      "name": "state"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "fields": "state"
+      "reference": {
+        "datapackage": "http://data.okfn.org/data/mydatapackage/",
+        "resource": "the-resource",
+        "fields": "state_id"
+      }
+    }
+  ]
+</code></pre>
+</div>
+
+<p>An example of a self-referencing foreign key:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>  "fields": [
+    {
+      "name": "parent"
+    },
+    {
+      "name": "id"
+    }
+  ],
+  "foreignKeys": [
+    {
+      "fields": "parent"
+      "reference": {
+        "datapackage": "",
+        "resource": "self",
+        "fields": "id"
+      }
+    }
+  ]
+</code></pre>
+</div>
+
+<hr />
+
+<h1 id="appendix-related-work">Appendix: Related Work</h1>
+
+<p>See <a href="/data-formats/">Web-Oriented Data Formats</a>  for more details and
+links for each format.</p>
+
+<ul>
+  <li>SQL</li>
+  <li>DSPL</li>
+  <li>JSON-Stat</li>
+  <li><a href="https://developers.google.com/bigquery/docs/import#jsonformat">Google
+BigQuery</a>
+(JSON format section)</li>
+</ul>
+
+<h2 id="dspl">DSPL</h2>
+
+<p>See <a href="https://developers.google.com/public-data/docs/schema/dspl18">https://developers.google.com/public-data/docs/schema/dspl18</a>.
+Allowed values:</p>
+
+<ul>
+  <li>string</li>
+  <li>float</li>
+  <li>integer</li>
+  <li>boolean</li>
+  <li>date</li>
+  <li>concept</li>
+</ul>
+
+<h2 id="google-bigquery">Google BigQuery</h2>
+
+<p>Example schema:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>"schema": {
+  "fields":[
+     {
+        "mode": "nullable",
+        "name": "placeName",
+        "type": "string"
+     },
+     {
+        "mode": "nullable",
+        "name": "kind",
+        "type": "string"
+     },  ...
+   ]
+ }
+</code></pre>
+</div>
+
+<p>Types:</p>
+
+<ul>
+  <li>string - UTF-8 encoded string up to 64K of data (as opposed to 64K
+characters).</li>
+  <li>integer - IEEE 64-bit signed integers: [-263-1, 263-1]</li>
+  <li>float - IEEE 754-2008 formatted floating point values</li>
+  <li>boolean - “true” or “false”, case-insensitive</li>
+  <li>record (JSON only) - a JSON object; also known as a nested record</li>
+</ul>
+
+<h2 id="xml-schema">XML Schema</h2>
+
+<p>See <a href="http://www.w3.org/TR/xmlschema-2/#built-in-primitive-datatypes">http://www.w3.org/TR/xmlschema-2/#built-in-primitive-datatypes</a></p>
+
+<ul>
+  <li>string</li>
+  <li>boolean</li>
+  <li>decimal</li>
+  <li>float</li>
+  <li>double</li>
+  <li>duration</li>
+  <li>dateTime</li>
+  <li>time</li>
+  <li>date</li>
+  <li>gYearMonth</li>
+  <li>gYear</li>
+  <li>gMonthDay</li>
+  <li>gDay</li>
+  <li>gMonth</li>
+  <li>hexBinary</li>
+  <li>base64Binary</li>
+  <li>anyURI</li>
+</ul>
+
+<h2 id="type-lists">Type Lists</h2>
+
+<ul>
+  <li>HTML5 Forms: <a href="http://www.whatwg.org/specs/web-apps/current-work/#attr-input-type">http://www.whatwg.org/specs/web-apps/current-work/#attr-input-type</a></li>
+</ul>
+
+
+
+
+
+
+      </div>
+    </div>
+  </div><!-- /content -->
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>
+        A project of <a href="http://okfn.org">Open Knowledge International</a>, with support from the <a href="http://sloan.org">Sloan Foundation</a> and the <a href="http://okfnlabs.org">Open Knowledge Labs community</a>
+        &ndash;
+        <a href="http://github.com/frictionlessdata/specs">Source Code</a>
+      </p>
+      <p>
+      <a href="http://opendefinition.org/okd/" title="Open Content">
+        <img src="http://assets.okfn.org/images/ok_buttons/oc_80x15_blue.png" alt="" border="" /></a>
+      <a href="http://opendefinition.org/ossd/" title="Open Online Software Service">
+        <img src="http://assets.okfn.org/images/ok_buttons/os_80x15_orange_grey.png" alt="" border="" />
+      </a>
+      </p>
+      <p>
+        Licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC Attribution license v3</a>
+      </p>
+  </div><!-- /container -->
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="http://assets.okfn.org/themes/okfn/collapse.min.js" type="text/javascript"></script>
+<script src="http://assets.okfn.org/themes/okfn/okf-panel.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.1/anchor.min.js"></script>
+<script>
+  anchors.options.icon = '#';
+  anchors.add('h2, h3, h4, h5, h6');
+</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-8271754-41']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title> 
+    Tabular Data Package - Frictionless Data - Open Knowledge International
+  </title>
+  <meta name="author" content="Open Knowledge International and others">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="//netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+  <link href="/css/style.css" rel="stylesheet" />
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-static-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/">
+        <img src="/img/frictionless-data.png" alt="" />
+        Frictionless Data
+        <small>Specifications</small>
+      </a>
+      <ul class="nav pull-right">
+        <li class="divider-vertical"></li>
+        <li class="dropdown">
+	  <a class="dropdown-toggle" data-toggle="dropdown" href="#">Specifications <b class="caret"></b></a>
+   	  <ul class="dropdown-menu">
+	    <li><a href="/data-packages">Data Packages</a></li>
+<li><a href="/json-table-schema">JSON Table Schema</a></li>
+<li><a href="/csv-dialect">CSV Dialect Description</a></li>
+<li><a href="/data-package-identifier">Data Package Identifiers</a></li>
+<li><a href="/tabular-data-package">Tabular Data Package</a></li>
+<li><a href="/fiscal-data-package">Fiscal Data Package</a></li>
+
+
+          </ul>
+        </li>
+        <li class="divider-vertical"></li>
+        <li>
+          <a href="http://frictionlessdata.io" title="Main Site">Main Site</a>
+        </li>        
+	
+        <li class="divider-vertical"></li>
+        <li>
+          <a href="https://discuss.okfn.org/c/frictionless-data" title="Join the discussion">Forum</a>
+        </li>
+	
+        <li class="divider-vertical"></li>
+        <li>
+          <a href="https://github.com/frictionlessdata/specs/issues" title="Report issues, suggestions and improvements">Issue Tracker</a>
+        </li>
+        <li class="divider-vertical"></li>
+        <li>
+          <a href="https://github.com/frictionlessdata/specs" title="Fork and pull to submit new material or corrections">Repo</a>
+        </li>
+	
+        <li class="divider-vertical"></li>
+        <li>
+          <a href="https://twitter.com/OKFNLabs">Twitter</a>
+        </li>
+	
+        <li class="divider-vertical"></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="content">
+    <div class="row">
+      <div class="span6 offset3">
+        <div class="banner page-header">
+          <h1>
+            Tabular Data Package
+            
+            <br />
+            <small>
+              (previously known as Simple Data Format)
+            </small>
+            
+          </h1>
+        </div>
+
+        
+  
+  
+
+
+
+
+
+  <p><p>This document defines a simple data publishing format (Tabular Data Package) for publishing and sharing tabular-style data.</p>
+</p>
+
+
+<table class="table table-striped meta">
+  
+  
+    <tr><td>Version</td><td>1.0-beta-4</td></tr>
+  
+  
+    <tr><td>Last Updated</td><td>30 November 2016</td></tr>
+  
+  
+    <tr><td>Created</td><td>May 7 2012</td></tr>
+  
+</table>
+
+
+
+
+  
+  <h1 id="language">Language</h1>
+
+<p>The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this document are to be interpreted as described in <a href="https://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>.</p>
+
+
+
+
+
+
+<h1 id="summary">Summary</h1>
+
+<p>This document defines a simple data publishing format (Tabular Data
+Package) for publishing and sharing tabular-style data.</p>
+
+<p>The format’s focus is on simplicity and ease of use over the web – that
+is, usage online with access and transmission <em>over HTTP</em>. In addition
+the format is focused on data that can be presented in a tabular
+structure and in making it easy to produce (and consume) this format
+from spreadsheets and relational databases.</p>
+
+<p>The key features of this format are the following:</p>
+
+<ul>
+  <li>CSV (comma separated variables) for data</li>
+  <li>Single JSON file (datapackage.json) to describe the dataset
+including a schema for data files</li>
+  <li>Reuse wherever possible of existing work including other Data
+Protocols specifications</li>
+</ul>
+
+<p>As suggested by the name, Tabular Data Package extends and specializes the
+<a href="../data-packages/">Data Package</a> spec for the specific case where the data is tabular.</p>
+
+<div class="alert alert-info">
+  <p>If you have comments or suggestions please file them in the issue
+tracker at: <a href="https://github.com/frictionlessdata/specs/issues">https://github.com/frictionlessdata/specs/issues</a>.</p>
+</div>
+
+<h3 id="changelog">Changelog</h3>
+
+<ul>
+  <li><code class="highlighter-rouge">1.0-beta-4</code>: no substantive changes but clarify schema referencing
+(<a href="https://github.com/frictionlessdata/specs/issues/264">#264</a></li>
+  <li><code class="highlighter-rouge">1.0-beta-3</code>: no substantive changes but clarify where we differ from CSV RFC
+(<a href="https://github.com/dataprotocols/dataprotocols/issues/204">#204</a>)</li>
+  <li><code class="highlighter-rouge">1.0-beta-2</code>: renamed from Simple Data Format to Tabular Data Package</li>
+</ul>
+
+<h3 class="no_toc" id="table-of-contents">Table of Contents</h3>
+
+<ul id="markdown-toc">
+  <li><a href="#summary" id="markdown-toc-summary">Summary</a>    <ul>
+      <li><a href="#changelog" id="markdown-toc-changelog">Changelog</a></li>
+      <li><a href="#quick-start" id="markdown-toc-quick-start">Quick Start</a></li>
+      <li><a href="#specification" id="markdown-toc-specification">Specification</a>        <ul>
+          <li><a href="#csv-files" id="markdown-toc-csv-files">CSV Files</a></li>
+        </ul>
+      </li>
+      <li><a href="#key-design-features-and-principles" id="markdown-toc-key-design-features-and-principles">Key Design Features and Principles</a>        <ul>
+          <li><a href="#why-csv" id="markdown-toc-why-csv">Why CSV</a></li>
+          <li><a href="#why-json-for-the-schema" id="markdown-toc-why-json-for-the-schema">Why JSON for the Schema</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="quick-start">Quick Start</h2>
+
+<p>A Tabular Data Package package contains:</p>
+
+<ul>
+  <li>Data files in CSV</li>
+  <li>(Minimal) dataset information in JSON (including a schema for the
+CSV)</li>
+</ul>
+
+<p>Here’s an example of a minimal simple data format dataset:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>2 files
+
+data.csv
+datapackage.json
+
+
+data.csv
+--------
+
+var1,var2,var3
+A,1,2
+B,3,4
+
+datapackage.json
+----------------
+
+{
+  "name": "my-dataset",
+  # here we list the data files in this dataset
+  "resources": [
+    {
+      "path": "data.csv",
+      "schema": {
+        "fields": [
+          {
+            "name": "var1",
+            "type": "string"
+          },
+          {
+            "name": "var2",
+            "type": "integer"
+          },
+          {
+            "name": "var3",
+            "type": "number"
+          }
+        ]
+      }
+    }
+  ]
+}
+</code></pre>
+</div>
+
+<h2 id="specification">Specification</h2>
+
+<p>This specification builds on the 
+<a href="/data-packages/">Data Packages specification</a>. It defines a profile for publishing data packages that places some additional constraints on metadata and data formats.</p>
+
+<p>A valid Tabular Data Package package MUST be a valid Data Package as defined in that specification. This means that it MUST:</p>
+
+<ul>
+  <li>Contain a package descriptor (<code class="highlighter-rouge">datapackage.json</code>)</li>
+  <li>Provide at least the minimum required package metadata as described in the Data Package specification</li>
+  <li>Include a description of each data file in the package in the <code class="highlighter-rouge">resources</code> array of the package</li>
+</ul>
+
+<p>In addition to those basic rules, a valid Tabular Data Package package MUST conform to the following additional 
+requirements:</p>
+
+<ul>
+  <li>It MUST contain at least one <em>data file</em></li>
+  <li>All data files MUST be in CSV format, see below for additional rules on CSV file naming and structure</li>
+  <li>Every resource MUST have a <code class="highlighter-rouge">schema</code> property whose value MUST follow the <a href="/json-table-schema/">JSON Table Schema</a>
+specification. The schema can be directly inlined, or pointed to for
+dereferencing as per the <a href="../data-packages/#resource-schemas">schemas section of the Data Package
+spec</a></li>
+</ul>
+
+<h3 id="csv-files">CSV Files</h3>
+
+<p>CSV files included in a Tabular Data Package package MUST conform to <a href="https://tools.ietf.org/html/rfc4180">RFC 4180
+“Common Format and MIME Type for Comma-Separated Values (CSV) Files”</a>
+subject to the following exceptions:</p>
+
+<ul>
+  <li>Files MUST be encoded as UTF-8 (the RFC requires 7-bit ASCII)</li>
+  <li>The standard line terminator character can be LF or CRLF (the RFC allows CRLF only)</li>
+  <li>Files MAY (but SHOULD NOT) deviate from standard CSV in terms of various
+parameters including field delimiters (e.g. tab rather than “,”), quote
+character etc (see below)</li>
+</ul>
+
+<p>In addition to these requirements:</p>
+
+<ul>
+  <li>File names MUST end with <code class="highlighter-rouge">.csv</code></li>
+  <li>
+    <p>Files MUST have a single header row. This row MUST be the first row in the
+file.</p>
+
+    <ul>
+      <li>Terminology: each column in the CSV file is termed a <em>field</em> and
+its <code class="highlighter-rouge">name</code> is the string in that column in the header row.</li>
+      <li>The <code class="highlighter-rouge">name</code> MUST be unique amongst fields and MUST contain at
+least one character</li>
+      <li>There are no further restrictions on the form of the <code class="highlighter-rouge">name</code> but
+it is RECOMMENDED that it contain only alphanumeric characters
+together with “ .-_”</li>
+    </ul>
+  </li>
+  <li>Rows in the file MUST NOT contain more fields than are in the header row (though they may
+contain less)</li>
+  <li>Each file MUST have an entry in the <code class="highlighter-rouge">resources</code> array in the <code class="highlighter-rouge">datapackage.json</code> file</li>
+  <li>The resource metadata MUST include a <code class="highlighter-rouge">schema</code> attribute whose value MUST conform to the JSON
+Table Schema</li>
+  <li>All fields in the CSV files MUST be described in the <code class="highlighter-rouge">schema</code></li>
+</ul>
+
+<p>CSV files generated by different applications often vary in their syntax, e.g.
+use of quoting characters, delimiters, etc. To encourage conformance, CSV files
+in a Tabular Data Package SHOULD</p>
+
+<ul>
+  <li>Use “,” as field delimiters (as per RFC)</li>
+  <li>Use “\r\n” (CRLF) or “\n” (LF) as line terminators</li>
+</ul>
+
+<p>If a CSV file does not follow these rules then its specific CSV dialect MUST be documented. The resource 
+hash for the resource in the <code class="highlighter-rouge">datapackage.json</code> descriptor MUST:</p>
+
+<ul>
+  <li>Include a <code class="highlighter-rouge">dialect</code> key that conforms to that described in the <a href="/csv-dialect/">CSV Dialect Description Format</a></li>
+</ul>
+
+<p>Applications processing the CSV file SHOULD use the <code class="highlighter-rouge">dialect</code> of the CSV file to guide parsing.</p>
+
+<h2 id="key-design-features-and-principles">Key Design Features and Principles</h2>
+
+<p>The format’s focus is on simplicity and web usage – that is, usage
+online with access and transmission <em>over HTTP</em>. In addition the format
+is focused on data that can be presented in a tabular structure and in
+making it easy to produce (and consume) this format from spreadsheets
+and relational databases.</p>
+
+<p>The key features of this format are the following:</p>
+
+<ul>
+  <li>CSV (comma separated variables) as the base data format</li>
+  <li>JSON as the base format for schema definition</li>
+  <li>Reuse wherever possible of existing work including other Data
+Protocols specifications</li>
+</ul>
+
+<h3 id="why-csv">Why CSV</h3>
+
+<ol>
+  <li>CSV is very simple - it is perhaps <em>the</em> most simple data format</li>
+  <li>CSV is tabular-oriented. Most data structures are either tabular or
+can be transformed to a tabular structure by some form of
+normalization</li>
+  <li>It is open and the “standard” is well-known</li>
+  <li>It is widely supported - practically every spreadsheet program,
+relational database and programming language in existence can handle
+CSV in some form or other</li>
+  <li>It is text-based and therefore amenable to manipulation and access
+from a wide range of standard tools (including revision control
+systems such as git, mercurial and subversion)</li>
+  <li>It is line-oriented which means it can be incrementally processed –
+you do not need to read an entire file to extract a single row. For
+similar reasons it means that the format supports streaming.</li>
+</ol>
+
+<p>More informally:</p>
+
+<blockquote>
+  <p>CSV is the data Kalashnikov: not pretty, but many wars have been
+fought with it and kids can use it.
+[<a href="https://twitter.com/pudo/status/248473299741446144">@pudo</a> (Friedrich
+Lindenberg)]</p>
+</blockquote>
+
+<blockquote>
+  <p>CSV is the ultimate simple, standard data format - streamable,
+text-based, no need for proprietary tools etc [@rufuspollock (Rufus
+Pollock)]</p>
+</blockquote>
+
+<h3 id="why-json-for-the-schema">Why JSON for the Schema</h3>
+
+<ul>
+  <li>JSON is simple</li>
+  <li>JSON supports rich structure including nesting and basic types</li>
+  <li>JSON is very widely used and supported (all major programming
+languages can handle JSON)</li>
+  <li>JSON is web-native (every browser can access and manipulate JSON)</li>
+  <li>JSON is readable as simple text making it amenable to management and
+processing using simple text tools</li>
+</ul>
+
+
+
+
+
+
+
+      </div>
+    </div>
+  </div><!-- /content -->
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>
+        A project of <a href="http://okfn.org">Open Knowledge International</a>, with support from the <a href="http://sloan.org">Sloan Foundation</a> and the <a href="http://okfnlabs.org">Open Knowledge Labs community</a>
+        &ndash;
+        <a href="http://github.com/frictionlessdata/specs">Source Code</a>
+      </p>
+      <p>
+      <a href="http://opendefinition.org/okd/" title="Open Content">
+        <img src="http://assets.okfn.org/images/ok_buttons/oc_80x15_blue.png" alt="" border="" /></a>
+      <a href="http://opendefinition.org/ossd/" title="Open Online Software Service">
+        <img src="http://assets.okfn.org/images/ok_buttons/os_80x15_orange_grey.png" alt="" border="" />
+      </a>
+      </p>
+      <p>
+        Licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC Attribution license v3</a>
+      </p>
+  </div><!-- /container -->
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="http://assets.okfn.org/themes/okfn/collapse.min.js" type="text/javascript"></script>
+<script src="http://assets.okfn.org/themes/okfn/okf-panel.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.1/anchor.min.js"></script>
+<script>
+  anchors.options.icon = '#';
+  anchors.add('h2, h3, h4, h5, h6');
+</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-8271754-41']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
+</html>

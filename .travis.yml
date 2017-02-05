@@ -1,0 +1,8 @@
+language: python
+python:
+- '2.7'
+install:
+- pip install awscli
+script:
+- aws s3 sync _site s3://pre-v1.frictionlessdata.io
+

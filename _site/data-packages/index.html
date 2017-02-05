@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title> 
+    Data Packages - Frictionless Data - Open Knowledge International
+  </title>
+  <meta name="author" content="Open Knowledge International and others">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="//netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+  <link href="/css/style.css" rel="stylesheet" />
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-static-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/">
+        <img src="/img/frictionless-data.png" alt="" />
+        Frictionless Data
+        <small>Specifications</small>
+      </a>
+      <ul class="nav pull-right">
+        <li class="divider-vertical"></li>
+        <li class="dropdown">
+	  <a class="dropdown-toggle" data-toggle="dropdown" href="#">Specifications <b class="caret"></b></a>
+   	  <ul class="dropdown-menu">
+	    <li><a href="/data-packages">Data Packages</a></li>
+<li><a href="/json-table-schema">JSON Table Schema</a></li>
+<li><a href="/csv-dialect">CSV Dialect Description</a></li>
+<li><a href="/data-package-identifier">Data Package Identifiers</a></li>
+<li><a href="/tabular-data-package">Tabular Data Package</a></li>
+<li><a href="/fiscal-data-package">Fiscal Data Package</a></li>
+
+
+          </ul>
+        </li>
+        <li class="divider-vertical"></li>
+        <li>
+          <a href="http://frictionlessdata.io" title="Main Site">Main Site</a>
+        </li>        
+	
+        <li class="divider-vertical"></li>
+        <li>
+          <a href="https://discuss.okfn.org/c/frictionless-data" title="Join the discussion">Forum</a>
+        </li>
+	
+        <li class="divider-vertical"></li>
+        <li>
+          <a href="https://github.com/frictionlessdata/specs/issues" title="Report issues, suggestions and improvements">Issue Tracker</a>
+        </li>
+        <li class="divider-vertical"></li>
+        <li>
+          <a href="https://github.com/frictionlessdata/specs" title="Fork and pull to submit new material or corrections">Repo</a>
+        </li>
+	
+        <li class="divider-vertical"></li>
+        <li>
+          <a href="https://twitter.com/OKFNLabs">Twitter</a>
+        </li>
+	
+        <li class="divider-vertical"></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="content">
+    <div class="row">
+      <div class="span6 offset3">
+        <div class="banner page-header">
+          <h1>
+            Data Packages
+            
+          </h1>
+        </div>
+
+        
+  
+  
+
+
+
+
+
+  <p><p>A Data Package (or DataPackage) is a coherent collection of data and possibly other assets in a single ‘package’. It provides the basis for convenient delivery, installation and management of datasets.</p>
+</p>
+
+
+<table class="table table-striped meta">
+  
+    <tr><td>Author</td><td>Rufus Pollock (Open Knowledge Labs)<br />Martin Keegan (Open Knowledge Labs)<br /></td></tr>
+  
+  
+    <tr><td>Version</td><td>1.0.0-beta.18</td></tr>
+  
+  
+    <tr><td>Last Updated</td><td>17 November 2016</td></tr>
+  
+  
+    <tr><td>Created</td><td>12 November 2007</td></tr>
+  
+</table>
+
+
+
+
+  
+  <h1 id="language">Language</h1>
+
+<p>The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this document are to be interpreted as described in <a href="https://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>.</p>
+
+
+
+
+
+
+<div class="alert">
+  <p>NOTE: This is a draft specification - though nearing v1.0. If you have comments
+or suggestions please file them in the <a href="https://github.com/dataprotocols/dataprotocols/issues">issue tracker</a>. If you have
+explicit changes please fork the <a href="https://github.com/dataprotocols/dataprotocols">git repo</a> and submit a pull request.</p>
+</div>
+
+<h3 id="changelog">Changelog</h3>
+
+<ul>
+  <li><code class="highlighter-rouge">1.0.0-beta.18</code>: (!) merge resource property url with path <a href="https://github.com/frictionlessdata/specs/issues/250">issues #250</a>, allow for multiple data files per resource <a href="https://github.com/frictionlessdata/specs/issues/228">issue #228</a></li>
+  <li><code class="highlighter-rouge">1.0.0-beta.17</code>: make resources property required as per <a href="https://github.com/dataprotocols/dataprotocols/issues/253">issues #253</a></li>
+  <li><code class="highlighter-rouge">1.0.0-beta.16</code>: description is markdown formatted as per <a href="https://github.com/dataprotocols/dataprotocols/issues/152">issue #152</a>; MimeType for Data Packages is vnd.datapackage <a href="https://github.com/dataprotocols/dataprotocols/issues/245">issue #245</a></li>
+  <li><code class="highlighter-rouge">1.0.0-beta.15</code>: only one of <code class="highlighter-rouge">url</code>, <code class="highlighter-rouge">path</code>, <code class="highlighter-rouge">data</code> present on as per <a href="https://github.com/dataprotocols/dataprotocols/issues/223">issue #223</a>; remove <code class="highlighter-rouge">base</code> property as per <a href="https://github.com/dataprotocols/dataprotocols/issues/232">issue #232</a></li>
+  <li><code class="highlighter-rouge">1.0.0-beta.14</code>: drop <code class="highlighter-rouge">licenses</code> in favour of <code class="highlighter-rouge">license</code> as per <a href="https://github.com/dataprotocols/dataprotocols/issues/214">issue #214</a></li>
+  <li><code class="highlighter-rouge">1.0.0-beta.13</code>: add support for sharing schemas across resources via schema references as per <a href="https://github.com/dataprotocols/dataprotocols/issues/71">issue #71</a></li>
+  <li><code class="highlighter-rouge">1.0.0-beta.12</code>: remove <code class="highlighter-rouge">datapackage_version</code> as per <a href="https://github.com/dataprotocols/dataprotocols/issues/140">issue #140</a></li>
+  <li><code class="highlighter-rouge">1.0.0-beta.11</code>: introduce <code class="highlighter-rouge">author</code>, integrate with <code class="highlighter-rouge">contributors</code> and remove <code class="highlighter-rouge">maintainers</code> and <code class="highlighter-rouge">publishers</code> as per this <a href="https://github.com/dataprotocols/dataprotocols/issues/130">issue</a></li>
+  <li><code class="highlighter-rouge">1.0.0-beta.10</code>: <code class="highlighter-rouge">license</code> introduced and <code class="highlighter-rouge">licenses</code> updated as per this <a href="https://github.com/dataprotocols/data-packages/issues/1">issue</a></li>
+  <li><code class="highlighter-rouge">1.0.0-beta.8</code>: <code class="highlighter-rouge">last_modified</code> and <code class="highlighter-rouge">modified</code> removed following this <a href="https://github.com/dataprotocols/dataprotocols/issues/83">issue</a></li>
+  <li><code class="highlighter-rouge">1.0.0-beta.7</code>: <code class="highlighter-rouge">dependencies</code> renamed to <code class="highlighter-rouge">dataDependencies</code> following this <a href="https://github.com/dataprotocols/dataprotocols/issues/75">issue</a></li>
+  <li><code class="highlighter-rouge">1.0.0-beta.5</code> -&gt; <code class="highlighter-rouge">1.0-beta.6</code>: Moved <code class="highlighter-rouge">resources</code> from MUST to MAY</li>
+</ul>
+
+<h3 class="no_toc" id="table-of-contents">Table of Contents</h3>
+
+<ul id="markdown-toc">
+  <li><a href="#changelog" id="markdown-toc-changelog">Changelog</a></li>
+  <li><a href="#specification" id="markdown-toc-specification">Specification</a>    <ul>
+      <li><a href="#illustrative-structure" id="markdown-toc-illustrative-structure">Illustrative Structure</a></li>
+      <li><a href="#descriptor-datapackagejson" id="markdown-toc-descriptor-datapackagejson">Descriptor (datapackage.json)</a></li>
+      <li><a href="#metadata" id="markdown-toc-metadata">Metadata</a>        <ul>
+          <li><a href="#required-fields" id="markdown-toc-required-fields">Required Fields</a></li>
+          <li><a href="#strongly-recommended-fields" id="markdown-toc-strongly-recommended-fields">Strongly Recommended Fields</a></li>
+          <li><a href="#recommended-fields" id="markdown-toc-recommended-fields">Recommended Fields</a></li>
+          <li><a href="#optional-fields" id="markdown-toc-optional-fields">Optional Fields</a></li>
+        </ul>
+      </li>
+      <li><a href="#resource-information" id="markdown-toc-resource-information">Resource Information</a>        <ul>
+          <li><a href="#data-location" id="markdown-toc-data-location">Data Location</a>            <ul>
+              <li><a href="#data-in-files-path" id="markdown-toc-data-in-files-path">Data in Files <code class="highlighter-rouge">path</code></a>                <ul>
+                  <li><a href="#data-in-multiple-files" id="markdown-toc-data-in-multiple-files">Data in Multiple Files</a></li>
+                </ul>
+              </li>
+              <li><a href="#inline-data-data" id="markdown-toc-inline-data-data">Inline Data <code class="highlighter-rouge">data</code></a></li>
+            </ul>
+          </li>
+          <li><a href="#recommended-fields-1" id="markdown-toc-recommended-fields-1">Recommended Fields</a></li>
+          <li><a href="#optional-fields-1" id="markdown-toc-optional-fields-1">Optional Fields</a></li>
+          <li><a href="#resource-schemas" id="markdown-toc-resource-schemas">Resource Schemas</a>            <ul>
+              <li><a href="#schema-references" id="markdown-toc-schema-references">Schema References</a></li>
+              <li><a href="#schemas-property" id="markdown-toc-schemas-property"><code class="highlighter-rouge">schemas</code> Property</a></li>
+              <li><a href="#examples" id="markdown-toc-examples">Examples</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#mediatype" id="markdown-toc-mediatype">MediaType</a></li>
+    </ul>
+  </li>
+  <li><a href="#appendices" id="markdown-toc-appendices">Appendices</a>    <ul>
+      <li><a href="#aims" id="markdown-toc-aims">Aims</a></li>
+      <li><a href="#how-it-fits-into-the-ecosystem" id="markdown-toc-how-it-fits-into-the-ecosystem">How It Fits into the Ecosystem</a></li>
+      <li><a href="#prior-work" id="markdown-toc-prior-work">Prior Work</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="specification">Specification</h1>
+
+<p>A data package consists of:</p>
+
+<ul>
+  <li>Metadata that describes the structure and contents of the package</li>
+  <li>Resources such as data files that form the contents of the package</li>
+</ul>
+
+<p>A valid data package MUST provide a data package “descriptor” file named
+<code class="highlighter-rouge">datapackage.json</code>. This file SHOULD be placed in the top-level directory
+(relative to any other resources provided as part of the data package).</p>
+
+<p>The data package descriptor provides general metadata about the data package
+and describes the resources that make up its contents. The structure of the
+descriptor is specified below.</p>
+
+<p>In addition to this descriptor a data package will include other resources such
+as data files. The Data Package specification does NOT impose any requirements
+on their form or structure and can therefore be used for packaging <strong>any kind
+of data</strong>.</p>
+
+<p>The data included in the package may be provided as:</p>
+
+<ul>
+  <li>Files bundled locally with the package descriptor</li>
+  <li>Remote resources, referenced by URL</li>
+  <li>“Inline” data (see below) which is included directly in the
+<code class="highlighter-rouge">datapackage.json</code> file</li>
+</ul>
+
+<h2 id="illustrative-structure">Illustrative Structure</h2>
+
+<p>A minimal data package on disk would be a directory containing a single file:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>datapackage.json  # (required) metadata and schemas for this data package
+</code></pre>
+</div>
+
+<p>Obviously lacking a single piece of actual data would make this of doubtful
+use. A slightly less minimal version would be:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>datapackage.json
+# a data file (CSV in this case)
+data.csv
+</code></pre>
+</div>
+
+<p>Additional files such as a README, scripts (for processing or analyzing the
+data) and other material may be provided. By convention scripts go in a scripts
+directory and thus, a more elaborate data package could look like this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>datapackage.json  # (required) metadata and schemas for this data package
+README.md         # (optional) README in markdown format
+
+# data files may go either in data subdirectory or in main directory
+mydata.csv
+data/otherdata.csv         
+
+# the directory for code scripts - again these can go in the base directory
+scripts/my-preparation-script.py
+</code></pre>
+</div>
+
+<p>Several exemplar data packages can be found in the <a href="https://github.com/datasets">datasets organization on github</a>, including:</p>
+
+<ul>
+  <li><a href="https://github.com/datasets/gdp">World GDP</a></li>
+  <li><a href="https://github.com/datasets/country-codes">ISO 3166-2 country codes</a></li>
+</ul>
+
+<h2 id="descriptor-datapackagejson">Descriptor (datapackage.json)</h2>
+
+<p><code class="highlighter-rouge">datapackage.json</code> is the central file in a Data Package. It provides:</p>
+
+<ul>
+  <li>General metadata such as the package’s title, license, publisher etc</li>
+  <li>A list of the data “resources” that make up the package including their
+location on disk or online and other relevant information (including,
+possibly, schema information about these data resources in a structured form)</li>
+</ul>
+
+<p>The Package descriptor MUST be a valid JSON file. (JSON is defined in <a href="http://www.ietf.org/rfc/rfc4627.txt">RFC 4627</a>).</p>
+
+<p>It MAY contain any number of attributes. All attributes at the first level not
+otherwise specified here are considered <code class="highlighter-rouge">metadata</code> attributes.</p>
+
+<p>A valid descriptor MUST contain a <code class="highlighter-rouge">name</code> attribute. These properties, and additional
+metadata attributes, are described in the “Required Fields” section below.</p>
+
+<p>A valid descriptor MAY contain a <code class="highlighter-rouge">resources</code> attribute.</p>
+
+<p>Here is an illustrative example of a datapackage JSON file:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="err">#</span><span class="w"> </span><span class="err">general</span><span class="w"> </span><span class="nt">"metadata"</span><span class="w"> </span><span class="err">like</span><span class="w"> </span><span class="err">title,</span><span class="w"> </span><span class="err">sources</span><span class="w"> </span><span class="err">etc</span><span class="w">
+  </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"a-unique-human-readable-and-url-usable-identifier"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"title"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"A nice title"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"license"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"The package's license"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"sources"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">],</span><span class="w">
+  </span><span class="err">#</span><span class="w"> </span><span class="err">list</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">data</span><span class="w"> </span><span class="err">resources</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">data</span><span class="w"> </span><span class="err">package</span><span class="w">
+  </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="err">...</span><span class="w"> </span><span class="err">resource</span><span class="w"> </span><span class="err">info</span><span class="w"> </span><span class="err">described</span><span class="w"> </span><span class="err">below</span><span class="w"> </span><span class="err">...</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="err">#</span><span class="w"> </span><span class="err">optional</span><span class="w">
+  </span><span class="err">...</span><span class="w"> </span><span class="err">additional</span><span class="w"> </span><span class="err">information</span><span class="w"> </span><span class="err">...</span><span class="w">
+</span><span class="err">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h2 id="metadata">Metadata</h2>
+
+<h3 id="required-fields">Required Fields</h3>
+
+<p>A valid package MUST include the following properties:</p>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">name</code> (required) - short url-usable (and preferably human-readable) name of
+the package. This MUST be lower-case and contain only alphanumeric characters
+along with “.”, “_” or “-“ characters. It will function as a unique
+identifier and therefore SHOULD be unique in relation to any registry in
+which this package will be deposited (and preferably globally unique).</p>
+
+    <p>The name SHOULD be invariant, meaning that it SHOULD NOT change when a data
+package is updated, unless the new package version should be considered a
+distinct package, e.g. due to significant changes in structure or
+interpretation. Version distinction SHOULD be left to the version property. As
+a corollary, the name also SHOULD NOT include an indication of time range
+covered.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">resources</code> - a JSON array of zero or more JSON objects. Each JSON object
+describes one of the data resources in the package and MUST follow the
+specification for resource objects in the “Resource Information” section
+below.</p>
+  </li>
+</ul>
+
+<h3 id="strongly-recommended-fields">Strongly Recommended Fields</h3>
+
+<p>In addition to the above properties, the following properties SHOULD be included in
+every package descriptor:</p>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">license</code> - is a property specifying the license under which the package is
+provided.</p>
+
+    <p><strong>This property is not legally binding and does not guarantee the package is
+licensed under the terms defined in this property.</strong></p>
+
+    <ul>
+      <li>
+        <p><code class="highlighter-rouge">license</code> is an object OR string. The value of the string version SHOULD be
+an <a href="http://licenses.opendefinition.org/">Open Definition license ID</a> (preferably one that is
+<a href="http://opendefinition.org/licenses/">Open Definition approved</a>. An example of the string version
+is as follows:</p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nt">"license"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ODC-PDDL-1.0"</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span></code></pre>
+        </div>
+      </li>
+    </ul>
+
+    <p>The object structure MUST contain a <code class="highlighter-rouge">type</code> property and a <code class="highlighter-rouge">url</code> property
+linking to the actual text. The <code class="highlighter-rouge">type</code> SHOULD be an
+<a href="http://licenses.opendefinition.org/">Open Definition license ID</a> if an ID exists for the license and
+otherwise may be the general license name or identifier. Here is an example:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>  "license": {
+    "type": "ODC-PDDL-1.0",
+    "url": "http://opendatacommons.org/licenses/pddl/"
+  }
+</code></pre>
+    </div>
+  </li>
+</ul>
+
+<h3 id="recommended-fields">Recommended Fields</h3>
+
+<p>The following are commonly used properties that the package descriptor MAY contain:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">title</code> - a title or one sentence description for this package</li>
+  <li><code class="highlighter-rouge">description</code> - a description of the package. The description MUST be
+<a href="http://commonmark.org/">markdown</a> formatted – this also allows for simple plain text as plain
+text is itself valid markdown. The first paragraph (up to the first double
+line break) should be usable as summary information for the package.</li>
+  <li><code class="highlighter-rouge">homepage</code> - URL string for the data packages web site</li>
+  <li><code class="highlighter-rouge">version</code> - a version string identifying the version of the package. It should conform to the <a href="http://semver.org">Semantic Versioning</a> requirements.</li>
+  <li>
+    <p><code class="highlighter-rouge">sources</code> - an array of source objects. Each source object may have <code class="highlighter-rouge">name</code>, <code class="highlighter-rouge">web</code> and <code class="highlighter-rouge">email</code> properties. Example:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>"sources": [{
+  "name": "World Bank and OECD",
+  "web": "http://data.worldbank.org/indicator/NY.GDP.MKTP.CD"
+}]
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">author</code> and <code class="highlighter-rouge">contributors</code> - these are properties for describing people or
+organizations who contributed to this Data Package. <code class="highlighter-rouge">author</code> is a single
+person / organization whilst <code class="highlighter-rouge">contributors</code> is an array. By convention, the
+first contributor is the original author of the package unless <code class="highlighter-rouge">author</code> is
+also present - in this sense, <code class="highlighter-rouge">author</code> is simply a convenience that allows
+for single line entries like the following:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>"author": "Joe Bloggs &lt;joe@bloggs.com&gt;"
+</code></pre>
+    </div>
+
+    <p>A “person” or “organization” is an object OR string. It MUST contain a <code class="highlighter-rouge">name</code>
+property and MAY contain <code class="highlighter-rouge">web</code> and <code class="highlighter-rouge">email</code>. An example of the object structure
+is as follows:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Joe Bloggs"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"joe@bloggs.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"web"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.bloggs.com"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+    </div>
+
+    <p>The string version has the following structure:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>NAME &lt;EMAIL&gt; (WEB)
+</code></pre>
+    </div>
+
+    <p>Example:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>Joe Bloggs &lt;joe@bloggs.com&gt; (http://www.bloggs.com/)
+</code></pre>
+    </div>
+
+    <p>Email and web are optional in the string version as well e.g.:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>Joe Bloggs
+Joe Bloggs &lt;joe@bloggs.com&gt;
+Joe Bloggs (http://www.bloggs.com)
+</code></pre>
+    </div>
+
+    <p>Note on semantics: use of the “author” property does not imply that that person
+was the original creator of the data in the data package - merely that they
+created and/or maintain the data package. It is common for data packages to
+“package” up data from elsewhere. The original origin of the data can be
+indicated with the <code class="highlighter-rouge">sources</code> property - see above.</p>
+  </li>
+  <li><code class="highlighter-rouge">keywords</code> - an Array of string keywords to assist users searching for the
+package in catalogs.</li>
+</ul>
+
+<h3 id="optional-fields">Optional Fields</h3>
+
+<p>A package descriptor MAY contain the following properties:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">image</code> - a link to an image to use for this data package</li>
+  <li>
+    <p><code class="highlighter-rouge">dataDependencies</code> - Object of prerequisite data packages on which this package
+depends in order to install. Follows same format as CommonJS Packages spec
+v1.1.Each dependency defines the lowest compatible MAJOR[.MINOR[.PATCH]]
+dependency versions (only one per MAJOR version) with which the package has
+been tested and is assured to work. The version may be a simple version
+string (see the version property for acceptable forms), or it may be an object
+group of dependencies which define a set of options, any one of which
+satisfies the dependency. The ordering of the group is significant and
+earlier entries have higher priority. Example:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>"dataDependencies": {
+   "country-codes": "",
+   "unemployment": "2.1",
+   "geo-boundaries": {
+     "acmecorp-geo-boundaries": ["1.0", "2.0"],
+     "othercorp-geo-boundaries": "0.9.8",
+   },
+}
+</code></pre>
+    </div>
+  </li>
+  <li><code class="highlighter-rouge">schemas</code>: an Object containing schemas keyed by a name. See the <a href="#resource-schemas">Resource
+Schemas</a> section below.</li>
+</ul>
+
+<div class="alert">
+  <p>NOTE: A Data Package author MAY add any number of additional properties beyond those
+listed in the specification here.  For example, suppose you were storing
+time series data and want to list the temporal coverage of the data in the
+Data Package you could add a property <code class="highlighter-rouge">temporal</code> (cf <a href="http://dublincore.org/documents/usageguide/qualifiers.shtml#temporal">Dublin Core</a>):</p>
+
+  <div class="highlighter-rouge"><pre class="highlight"><code>"temporal": {
+  "name": "19th Century",
+  "start": "1800-01-01",
+  "end": "1899-12-31"
+}
+</code></pre>
+  </div>
+
+  <p>This flexibility enables specific communities to extend Data Packages as
+appropriate for the data they manage. As an example, the <a href="/tabular-data-package/">Tabular Data
+Package</a> specification extends Data Package to the case
+where all the data is tabular and stored in CSV.</p>
+</div>
+
+<h2 id="resource-information">Resource Information</h2>
+
+<p>Packaged data resources are described in the <code class="highlighter-rouge">resources</code> property of the package descriptor. 
+This property is an array of values. Each value describes a single resource and 
+MUST be a JSON object.</p>
+
+<h3 id="data-location">Data Location</h3>
+
+<p>A resource MUST contain a property describing the location of the
+data associated to the resource. The location of resource data MUST be
+specified by the presence of one (and only one) of these two properties:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">path</code>: for data in files located online or locally on disk.</li>
+  <li><code class="highlighter-rouge">data</code>: for data inline in the <code class="highlighter-rouge">datapackage.json</code> descriptor itself.</li>
+</ul>
+
+<h4 id="data-in-files-path">Data in Files <code class="highlighter-rouge">path</code></h4>
+
+<p><code class="highlighter-rouge">path</code> MUST be a string – or an array of strings (see “Data in Multiple
+Files”). Strings MUST be one of:</p>
+
+<ul>
+  <li>A fully qualified url</li>
+  <li>A relative unix-style path (‘/’ as separator)</li>
+</ul>
+
+<p>A relative path MUST be interpreted relative to the directory or URL in which
+the descriptor <code class="highlighter-rouge">datapackage.json</code> listing this resource resides. A relative
+<code class="highlighter-rouge">path</code> MUST NOT start with <code class="highlighter-rouge">/</code> or <code class="highlighter-rouge">.</code> (which eliminates relative parent paths
+such as <code class="highlighter-rouge">../</code>).</p>
+
+<p>Examples:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># fully qualified url
+"path": "http://ex.datapackages.org/big-csv/my-big.csv"
+
+# relative path
+# note: this will work both a relative path on disk and online
+"path": "my-data-directory/my-csv.csv"
+</code></pre>
+</div>
+
+<div class="alert security">
+  <p>SECURITY:  <code class="highlighter-rouge">/</code> (absolute path) and <code class="highlighter-rouge">../</code> (relative parent path) are forbidden to
+avoid security vulnerabilities when implementing data package tools. These
+limitations on resource <code class="highlighter-rouge">path</code> ensure that resource paths only point to files
+within the data package directory and its subdirectories. This prevents
+data package tools being exploited by a malicious user to gain unintended
+access to sensitive information.</p>
+
+  <p>For example, suppose a data package hosting service stores packages on disk and
+allows access via an API. A malicious user uploads a data package with a
+resource path like <code class="highlighter-rouge">/etc/passwd</code>.  The user then requests the data for that
+resource and the server naively opens <code class="highlighter-rouge">/etc/passwd</code> and returns that data to
+the caller.</p>
+</div>
+
+<div class="alert implementor">
+  <p>IMPLEMENTOR: prior to release 1.0.0-beta.18 (Nov 17 2016) there was a <code class="highlighter-rouge">url</code>
+property distinct from <code class="highlighter-rouge">path</code>. In order to support backwards compatability,
+implementors MAY want to automatically convert a <code class="highlighter-rouge">url</code> property to a <code class="highlighter-rouge">path</code>
+property and issue a warning.</p>
+</div>
+
+<h5 id="data-in-multiple-files">Data in Multiple Files</h5>
+
+<p>Usually, a resource will have only a single file associated to it. However,
+sometimes it may be convenient to have a single resource whose data is split
+across multiple files – perhaps the data is large and having it in one file
+would be inconvenient.</p>
+
+<p>To support this use case the <code class="highlighter-rouge">path</code> property MAY be an array of strings rather
+than a single string:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>"path": [ "myfile1.csv", "myfile2.csv" ]
+</code></pre>
+</div>
+
+<p>It is NOT permitted to mix fully qualified URLs and relative paths in a <code class="highlighter-rouge">path</code>
+array: strings MUST either all be relative paths or all URLs.</p>
+
+<div class="alert implementor">
+  <p>NOTE: all files in the array MUST be similar in terms of structure, format etc.
+Implementors SHOULD be able simply concatenate the files together and treat the
+result as one large file. For tabular data there is the issue of header rows. See the <a href="/tabular-data-package/">Tabular Data Package spec</a> for more on this.</p>
+</div>
+
+<h4 id="inline-data-data">Inline Data <code class="highlighter-rouge">data</code></h4>
+
+<p>Resource data rather than being stored in external files can be shipped
+‘inline’ on a Resource using the <code class="highlighter-rouge">data</code> attribute.</p>
+
+<p>The value of the data attribute  can be any type of data. However, restrictions
+of JSON require that the value be a string so for binary data you will need to
+encode (e.g. to Base64). Information on the type and encoding of the value of
+the data attribute SHOULD be provided by the format (or mediatype) attribute
+and the encoding attribute.</p>
+
+<p>Specifically: the value of the data attribute MUST be:</p>
+
+<ul>
+  <li>EITHER: a JSON array or object - the data is then assumed to be JSON data and SHOULD be processed as such</li>
+  <li>OR: a JSON string - in this case the format or mediatype attributes MUST be provided.</li>
+</ul>
+
+<p>Thus, a consumer of resource object MAY assume if no format or mediatype
+attribute is provided that the data is JSON and attempt to process it as such.</p>
+
+<p>Examples 1 - inline JSON:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+   </span><span class="err">...</span><span class="w">
+   </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+     </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"json"</span><span class="p">,</span><span class="w">
+        </span><span class="err">#</span><span class="w"> </span><span class="err">some</span><span class="w"> </span><span class="err">json</span><span class="w"> </span><span class="err">data</span><span class="w"> </span><span class="err">e.g.</span><span class="w"> 
+        </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+           </span><span class="p">{</span><span class="w"> </span><span class="nt">"a"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">},</span><span class="w">
+           </span><span class="p">{</span><span class="w"> </span><span class="err">....</span><span class="w"> </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+     </span><span class="p">}</span><span class="w">
+   </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>Example 2 - inline CSV:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+   </span><span class="err">...</span><span class="w">
+   </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+     </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"csv"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A,B,C\n1,2,3\n4,5,6"</span><span class="w">
+     </span><span class="p">}</span><span class="w">
+   </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h3 id="recommended-fields-1">Recommended Fields</h3>
+
+<p>It is recommended that a resource SHOULD contain the following properties:</p>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">name</code>: a resource SHOULD contain an <code class="highlighter-rouge">name</code> attribute. The name is a simple name or
+identifier to be used for this resource.</p>
+
+    <ul>
+      <li>If present, the name MUST be unique amongst all resources in this data
+package.</li>
+      <li>The name SHOULD be usable in a url path and SHOULD therefore consist only
+of alphanumeric characters plus “.”, “-“ and “_”.</li>
+      <li>It would be usual for the name to correspond to the file name (minus the
+extension) of the data file the resource describes.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="optional-fields-1">Optional Fields</h3>
+
+<p>A resource MAY contain any number of additional properties. Common properties include:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">title</code>: a title or label for the resource.</li>
+  <li><code class="highlighter-rouge">description</code>: a description of the resource.</li>
+  <li><code class="highlighter-rouge">format</code>: ‘csv’, ‘xls’, ‘json’ etc. Would be expected to be the standard file
+extension for this type of resource.</li>
+  <li><code class="highlighter-rouge">mediatype</code>: the mediatype/mimetype of the resource e.g. ‘text/csv’, ‘application/vnd.ms-excel’</li>
+  <li><code class="highlighter-rouge">encoding</code>: specify the character encoding of the resource’s data file. The values should be one of 
+ the “Preferred MIME Names” for <a href="http://www.iana.org/assignments/character-sets/character-sets.xhtml">a character encoding registered with IANA</a>. If no 
+ value for this key is specified then the default is UTF-8.</li>
+  <li><code class="highlighter-rouge">bytes</code>: size of the file in bytes</li>
+  <li>
+    <p><code class="highlighter-rouge">hash</code>: the MD5 hash for this resource. Other algorithms can be indicated by prefixing
+the hash’s value with the algorithm name in lower-case. For example:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>"hash": "sha1:8843d7f92416211de9ebb963ff4ce28125932878"
+</code></pre>
+    </div>
+  </li>
+  <li><code class="highlighter-rouge">schema</code>: a schema or a pointer to the schema for the resource - see below
+for more on this attribute</li>
+  <li><code class="highlighter-rouge">sources</code>: as for data package metadata.</li>
+  <li><code class="highlighter-rouge">license</code>: as for data package metadata. If not specified the resource
+inherits from the data package.</li>
+</ul>
+
+<h3 id="resource-schemas">Resource Schemas</h3>
+
+<p>The value for the <code class="highlighter-rouge">schema</code> property on a <code class="highlighter-rouge">resource</code> MUST be an Object or a
+string that “references” an Object as detailed below.</p>
+
+<div class="alert">
+  <p>NOTE: the Data Package specification places no restrictions on the form of this
+Object. This flexibility enables specific communities to define schemas
+appropriate for the data they manage. As an example, the <a href="/tabular-data-package/">Tabular Data
+Package</a> specification requires the schema value to conform to <a href="/json-table-schema/">JSON Table
+Schema</a>.</p>
+</div>
+
+<h4 id="schema-references">Schema References</h4>
+
+<p>If <code class="highlighter-rouge">schema</code> is a string it is a “reference” to an Object and MUST be:</p>
+
+<ul>
+  <li>
+    <p>EITHER: a URL. The URL MUST:</p>
+
+    <ul>
+      <li>EITHER: resolve to a JSON document that is the schema</li>
+      <li>OR: include a fragment identifier which conforms to to <a href="http://tools.ietf.org/html/rfc6901">JSON
+Pointer</a> notation. The URL must then
+resolve to a JSON document and the schema is obtained by resolving within
+that JSON document using the fragment identifier as the JSON pointer as per
+section 6 of the JSON pointer specification.  URL.</li>
+    </ul>
+  </li>
+  <li>
+    <p>OR: a simple string name which MUST correspond to the ‘name’ (key) in the
+<code class="highlighter-rouge">schemas</code> object in the same datapackage.json file - see next section.</p>
+  </li>
+</ul>
+
+<h4 id="schemas-property"><code class="highlighter-rouge">schemas</code> Property</h4>
+
+<p>A Data Package MAY have a <code class="highlighter-rouge">schemas</code> property. The value of the property MUST be
+an Object. Each key in the Object is the name of a schema. A schema name MUST consist only of
+lower-case alphanumeric letters, together with</p>
+<ul>
+  <li>and _.</li>
+</ul>
+
+<p>Each value for an entry in the <code class="highlighter-rouge">schemas</code> Object must be an Object
+specifying an appropriate schema.</p>
+
+<h4 id="examples">Examples</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+      </span><span class="nt">"schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://url-to/datapackage.json#schemas/schema-name"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="err">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+</span><span class="err">...</span><span class="w">
+</span><span class="err">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+      </span><span class="nt">"schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xyz-schema"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"schemas"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"xyz-schema"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="err">schema</span><span class="w"> </span><span class="err">goes</span><span class="w"> </span><span class="err">here</span><span class="w"> </span><span class="err">...</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h2 id="mediatype">MediaType</h2>
+
+<p>The MediaType [RFC4288] for a Data Package SHOULD be <em>application/vnd.datapackage</em>.</p>
+
+<h1 id="appendices">Appendices</h1>
+
+<h2 id="aims">Aims</h2>
+
+<ul>
+  <li>Simple</li>
+  <li>Extensible</li>
+  <li>Human editable (for metadata)</li>
+  <li>Machine usable (easily parsable and editable)</li>
+  <li>Based on existing standard formats</li>
+  <li>Not linked to a particular language or system</li>
+</ul>
+
+<h2 id="how-it-fits-into-the-ecosystem">How It Fits into the Ecosystem</h2>
+
+<ul>
+  <li>Minimal wrapping to provide for machine automated sharing and obtaining of
+data</li>
+  <li>Data Packages can be registered into and found in indexes (local or remote)</li>
+  <li>Tools (based on code libraries) integrate with these indexes (and storage) to
+download and upload material</li>
+</ul>
+
+<p><img src="https://docs.google.com/drawings/pub?id=1W0s91bQGS-bmGOLm519mMq9zDJvRhP71pwuJtkflRws&amp;w=896&amp;h=660" align="center" alt="Data Packages and the Wider Ecosystem" width="90%" /></p>
+
+<h2 id="prior-work">Prior Work</h2>
+
+<p>The specification is heavily inspired by various software packaging formats.
+<a href="/data-packages/appendix/">Read the Appendix</a>.</p>
+
+
+
+
+
+
+
+      </div>
+    </div>
+  </div><!-- /content -->
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>
+        A project of <a href="http://okfn.org">Open Knowledge International</a>, with support from the <a href="http://sloan.org">Sloan Foundation</a> and the <a href="http://okfnlabs.org">Open Knowledge Labs community</a>
+        &ndash;
+        <a href="http://github.com/frictionlessdata/specs">Source Code</a>
+      </p>
+      <p>
+      <a href="http://opendefinition.org/okd/" title="Open Content">
+        <img src="http://assets.okfn.org/images/ok_buttons/oc_80x15_blue.png" alt="" border="" /></a>
+      <a href="http://opendefinition.org/ossd/" title="Open Online Software Service">
+        <img src="http://assets.okfn.org/images/ok_buttons/os_80x15_orange_grey.png" alt="" border="" />
+      </a>
+      </p>
+      <p>
+        Licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC Attribution license v3</a>
+      </p>
+  </div><!-- /container -->
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="http://assets.okfn.org/themes/okfn/collapse.min.js" type="text/javascript"></script>
+<script src="http://assets.okfn.org/themes/okfn/okf-panel.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.1/anchor.min.js"></script>
+<script>
+  anchors.options.icon = '#';
+  anchors.add('h2, h3, h4, h5, h6');
+</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-8271754-41']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
+</html>
