@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title> 
+  <title>
     Tabular Data Package - Frictionless Data - Open Knowledge International
   </title>
   <meta name="author" content="Open Knowledge International and others">
@@ -18,8 +18,12 @@
   <script src="//netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
   <link href="/css/style.css" rel="stylesheet" />
 
+  
+  
 
-
+  <!-- Consent manager -->
+  <script>var okiConsent = {analyticsTrackingID: 'UA-8271754-41'}</script>
+  <script src="https://a.okfn.org/html/oki/consent/assets/js/consent.js"></script>
 
 </head>
 <body>
@@ -50,7 +54,7 @@
         <li class="divider-vertical"></li>
         <li>
           <a href="http://frictionlessdata.io" title="Main Site">Main Site</a>
-        </li>        
+        </li>
 	
         <li class="divider-vertical"></li>
         <li>
@@ -200,7 +204,7 @@ CSV)</li>
 
 <p>Here’s an example of a minimal simple data format dataset:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>2 files
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2 files
 
 data.csv
 datapackage.json
@@ -241,8 +245,7 @@ datapackage.json
     }
   ]
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="specification">Specification</h2>
 
@@ -429,16 +432,6 @@ processing using simple text tools</li>
   anchors.options.icon = '#';
   anchors.add('h2, h3, h4, h5, h6');
 </script>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-8271754-41']);
-  _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title> 
+  <title>
     CSV Dialect Description Format (CSVDDF) - Frictionless Data - Open Knowledge International
   </title>
   <meta name="author" content="Open Knowledge International and others">
@@ -18,8 +18,12 @@
   <script src="//netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
   <link href="/css/style.css" rel="stylesheet" />
 
+  
+  
 
-
+  <!-- Consent manager -->
+  <script>var okiConsent = {analyticsTrackingID: 'UA-8271754-41'}</script>
+  <script src="https://a.okfn.org/html/oki/consent/assets/js/consent.js"></script>
 
 </head>
 <body>
@@ -50,7 +54,7 @@
         <li class="divider-vertical"></li>
         <li>
           <a href="http://frictionlessdata.io" title="Main Site">Main Site</a>
-        </li>        
+        </li>
 	
         <li class="divider-vertical"></li>
         <li>
@@ -161,17 +165,16 @@ bulk load statement, without danger of corrupting the data.</p>
 
 <p>Here’s an example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"csvddfVersion"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"delimiter"</span><span class="p">:</span><span class="w"> </span><span class="s2">","</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"doubleQuote"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"lineTerminator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"\r\n"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"quoteChar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"\""</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"skipInitialSpace"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"header"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "csvddfVersion": 1.0,
+  "delimiter": ",",
+  "doubleQuote": true,
+  "lineTerminator": "\r\n",
+  "quoteChar": "\"",
+  "skipInitialSpace": true,
+  "header": true
+}
+</code></pre></div></div>
 
 <h1 id="specification">Specification</h1>
 
@@ -267,16 +270,6 @@ format</a></p>
   anchors.options.icon = '#';
   anchors.add('h2, h3, h4, h5, h6');
 </script>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-8271754-41']);
-  _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
 </body>
 </html>

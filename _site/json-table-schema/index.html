@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title> 
+  <title>
     JSON Table Schema - Frictionless Data - Open Knowledge International
   </title>
   <meta name="author" content="Open Knowledge International and others">
@@ -18,8 +18,12 @@
   <script src="//netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
   <link href="/css/style.css" rel="stylesheet" />
 
+  
+  
 
-
+  <!-- Consent manager -->
+  <script>var okiConsent = {analyticsTrackingID: 'UA-8271754-41'}</script>
+  <script src="https://a.okfn.org/html/oki/consent/assets/js/consent.js"></script>
 
 </head>
 <body>
@@ -50,7 +54,7 @@
         <li class="divider-vertical"></li>
         <li>
           <a href="http://frictionlessdata.io" title="Main Site">Main Site</a>
-        </li>        
+        </li>
 	
         <li class="divider-vertical"></li>
         <li>
@@ -213,7 +217,7 @@ are explicitly designated.</p>
 
 <p>To illustrate here’s a classic spreadsheet table:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>field     field
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>field     field
   |         |
   |         |
   V         V
@@ -222,18 +226,16 @@ are explicitly designated.</p>
  ------------------------------------
  valA  |   valB  |  valC   |   valD    &lt;--- Row
  ...
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>In JSON a table would be:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[
   { "A": value, "B": value, ... },
   { "A": value, "B": value, ... },
   ...
 ]
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h1 id="specification">Specification</h1>
 
@@ -253,29 +255,28 @@ data package description.</p>
 
 <p>A schema has the following structure:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="err">#</span><span class="w"> </span><span class="err">fields</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="err">an</span><span class="w"> </span><span class="err">ordered</span><span class="w"> </span><span class="err">list</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">field</span><span class="w"> </span><span class="err">descriptors</span><span class="w">
-  </span><span class="err">#</span><span class="w"> </span><span class="err">one</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">each</span><span class="w"> </span><span class="err">field</span><span class="w"> </span><span class="err">(column)</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">table</span><span class="w">
-  </span><span class="nt">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="err">#</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">field-descriptor</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name of field (e.g. column name)"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A nicer human readable label or title for the field"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A string specifying the type"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A string specifying a format"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A description for the field"</span><span class="w">
-      </span><span class="err">...</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="err">...</span><span class="w"> </span><span class="err">more</span><span class="w"> </span><span class="err">field</span><span class="w"> </span><span class="err">descriptors</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="err">#</span><span class="w"> </span><span class="err">(optional)</span><span class="w"> </span><span class="err">specification</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">primary</span><span class="w"> </span><span class="err">key</span><span class="w">
-  </span><span class="nt">"primaryKey"</span><span class="p">:</span><span class="w"> </span><span class="err">...</span><span class="w">
-  </span><span class="err">#</span><span class="w"> </span><span class="err">(optional)</span><span class="w"> </span><span class="err">specification</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">foreign</span><span class="w"> </span><span class="err">keys</span><span class="w">
-  </span><span class="s2">"foreignKeys"</span><span class="err">:</span><span class="w"> </span><span class="err">...</span><span class="w">
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  # fields is an ordered list of field descriptors
+  # one for each field (column) in the table
+  "fields": [
+    # a field-descriptor
+    {
+      "name": "name of field (e.g. column name)",
+      "title": "A nicer human readable label or title for the field",
+      "type": "A string specifying the type",
+      "format": "A string specifying a format",
+      "description": "A description for the field"
+      ...
+    },
+    ... more field descriptors
+  ],
+  # (optional) specification of the primary key
+  "primaryKey": ...
+  # (optional) specification of the foreign keys
+  "foreignKeys": ...
 
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+}
+</code></pre></div></div>
 
 <p>That is, a JSON Table Schema is:</p>
 
@@ -301,19 +302,18 @@ a user interface for data entry.</p>
 <p>At a minimum a field descriptor will contain at least a <code class="highlighter-rouge">name</code> key, but MAY
 have additional keys as described below:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name of field (e.g. column name)"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A nicer human readable label or title for the field"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A string specifying the type"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A string specifying a format"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"missingValue"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A description for the field"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"constraints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="err">#</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">constraints-descriptor</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "name": "name of field (e.g. column name)",
+  "title": "A nicer human readable label or title for the field",
+  "type": "A string specifying the type",
+  "format": "A string specifying a format",
+  "missingValue": "",
+  "description": "A description for the field",
+  "constraints": {
+      # a constraints-descriptor
+  }
+}
+</code></pre></div></div>
 
 <ul>
   <li>a field descriptor MUST be a Hash</li>
@@ -517,7 +517,7 @@ library can attempt to parse the datetime via a range of strategies.
 An example is <code class="highlighter-rouge">dateutil.parser.parse</code> from the <code class="highlighter-rouge">python-dateutils</code>
 library.</li>
   <li><strong>{PATTERN}</strong>: date/time values in this field can be parsed according to
-<code class="highlighter-rouge"><span class="p">{</span><span class="err">PATTERN</span><span class="p">}</span></code>. <code class="highlighter-rouge"><span class="p">{</span><span class="err">PATTERN</span><span class="p">}</span></code> MUST follow the syntax of <a href="https://docs.python.org/2/library/datetime.html#strftime-strptime-behavior">standard Python / C
+<code class="highlighter-rouge">{PATTERN}</code>. <code class="highlighter-rouge">{PATTERN}</code> MUST follow the syntax of <a href="https://docs.python.org/2/library/datetime.html#strftime-strptime-behavior">standard Python / C
 strptime</a>. (That is, values in the this field should be parseable
 by Python / C standard <code class="highlighter-rouge">strptime</code> using <code class="highlighter-rouge">PATTERN</code>).  Example: <code class="highlighter-rouge">%d %b %y</code>
 would correspond to dates like: <code class="highlighter-rouge">30 Nov 14</code></li>
@@ -600,11 +600,10 @@ for a field using the the <code class="highlighter-rouge">missingValue</code> pr
 <p>If present, the <code class="highlighter-rouge">missingValue</code> MUST be a single string or an array of strings,
 for example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>"missingValue": ""
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"missingValue": ""
 "missingValue": "-"
 "missingValue": ["Nan", "-"]
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>Note</strong>: <code class="highlighter-rouge">missingValue</code> are strings rather than being the data type of
 the particular field. This allows for comparison prior to casting and for
@@ -645,7 +644,7 @@ be provided using a <code class="highlighter-rouge">rdfType</code> property on a
   </tbody>
 </table>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># JSON Table Schema
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># JSON Table Schema
 {
   fields: [
     {
@@ -656,8 +655,7 @@ be provided using a <code class="highlighter-rouge">rdfType</code> property on a
     ... 
   }
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="primary-key">Primary Key</h2>
 
@@ -687,19 +685,18 @@ key).</li>
 
 <p>Here’s an example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>  "fields": [
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  "fields": [
     {
       "name": "a"
     },
     ...
   ],
   "primaryKey": "a"
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Here’s an example with an array primary key:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>"schema": {
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"schema": {
   "fields": [
     {
       "name": "a"
@@ -714,8 +711,7 @@ key).</li>
   ],
   "primaryKey": ["a", "c"]
  }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="foreign-keys">Foreign Keys</h2>
 
@@ -764,7 +760,7 @@ the string or array is as per <code class="highlighter-rouge">primaryKey</code> 
 
 <p>Here’s an example:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>  "fields": [
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  "fields": [
     {
       "name": "state"
     }
@@ -779,12 +775,11 @@ the string or array is as per <code class="highlighter-rouge">primaryKey</code> 
       }
     }
   ]
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>An example of a self-referencing foreign key:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>  "fields": [
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  "fields": [
     {
       "name": "parent"
     },
@@ -802,8 +797,7 @@ the string or array is as per <code class="highlighter-rouge">primaryKey</code> 
       }
     }
   ]
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <hr />
 
@@ -839,7 +833,7 @@ Allowed values:</p>
 
 <p>Example schema:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>"schema": {
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"schema": {
   "fields":[
      {
         "mode": "nullable",
@@ -853,8 +847,7 @@ Allowed values:</p>
      },  ...
    ]
  }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Types:</p>
 
@@ -935,16 +928,6 @@ characters).</li>
   anchors.options.icon = '#';
   anchors.add('h2, h3, h4, h5, h6');
 </script>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-8271754-41']);
-  _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
 </body>
 </html>

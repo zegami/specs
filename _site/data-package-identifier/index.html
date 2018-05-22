@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title> 
+  <title>
     Data Package Identifiers - Frictionless Data - Open Knowledge International
   </title>
   <meta name="author" content="Open Knowledge International and others">
@@ -18,8 +18,12 @@
   <script src="//netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
   <link href="/css/style.css" rel="stylesheet" />
 
+  
+  
 
-
+  <!-- Consent manager -->
+  <script>var okiConsent = {analyticsTrackingID: 'UA-8271754-41'}</script>
+  <script src="https://a.okfn.org/html/oki/consent/assets/js/consent.js"></script>
 
 </head>
 <body>
@@ -50,7 +54,7 @@
         <li class="divider-vertical"></li>
         <li>
           <a href="http://frictionlessdata.io" title="Main Site">Main Site</a>
-        </li>        
+        </li>
 	
         <li class="divider-vertical"></li>
         <li>
@@ -129,13 +133,12 @@ want to take a Data Package Identifier as an argument.</p>
 
 <p>For example, consider the <code class="highlighter-rouge">dpm</code> (the Data Package Manager) has commands like:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># gdp is a Data Package identifier
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># gdp is a Data Package identifier
 dpm info gdp
 
 # https://github.com/datasets/gold-prices is a Data Package identifier
 dpm install https://github.com/datasets/gold-prices
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="identifier-object-structure">Identifier Object Structure</h2>
 
@@ -146,14 +149,14 @@ dpm install https://github.com/datasets/gold-prices
   <span class="c1">// This URL should *always* have a trailing slash ('/')</span>
   <span class="nl">url</span><span class="p">:</span> <span class="p">...</span>
   <span class="c1">// URL to datapackage.json</span>
-  <span class="nl">dataPackageJsonUrl</span><span class="p">:</span> <span class="p">...</span>
+  <span class="nx">dataPackageJsonUrl</span><span class="p">:</span> <span class="p">...</span>
   <span class="c1">// name of the Data Package</span>
-  <span class="nl">name</span><span class="p">:</span> <span class="p">...</span>
+  <span class="nx">name</span><span class="p">:</span> <span class="p">...</span>
   <span class="c1">// version of the Data Package</span>
-  <span class="nl">version</span><span class="p">:</span> <span class="p">...</span>
+  <span class="nx">version</span><span class="p">:</span> <span class="p">...</span>
   <span class="c1">// if parsed from a Identifier String this is the original </span>
   <span class="c1">// specString</span>
-  <span class="nl">original</span><span class="p">:</span> 
+  <span class="nx">original</span><span class="p">:</span> 
 <span class="p">}</span></code></pre></figure>
 
 <p>It can be parsed (and less importantly) serialized to a simple string. Spec
@@ -168,48 +171,41 @@ package.</p>
   <li>
     <p>A URL that points directly to the <code class="highlighter-rouge">datapackage.json</code> (no resolution needed):</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>http://mywebsite.com/mydatapackage/datapackage.json
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://mywebsite.com/mydatapackage/datapackage.json
+</code></pre></div>    </div>
   </li>
   <li>
     <p>A URL that points directly to the Data Package (that is, the directory containing the <code class="highlighter-rouge">datapackage.json</code>):</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>http://mywebsite.com/mydatapackage/
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://mywebsite.com/mydatapackage/
+</code></pre></div>    </div>
 
     <p>resolves to:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>http://mywebsite.com/mydatapackage/datapackage.json
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://mywebsite.com/mydatapackage/datapackage.json
+</code></pre></div>    </div>
   </li>
   <li>
     <p>A GitHub URL:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>http://github.com/datasets/gold-prices
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://github.com/datasets/gold-prices
+</code></pre></div>    </div>
 
     <p>resolves to:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>https://raw.githubusercontent.com/datasets/gold-prices/master/datapackage.json
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/datasets/gold-prices/master/datapackage.json
+</code></pre></div>    </div>
   </li>
   <li>
     <p>The <code class="highlighter-rouge">name</code> of a dataset in the <a href="http://data.okfn.org/data">Core Datasets registry</a>:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>gold-prices
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gold-prices
+</code></pre></div>    </div>
 
     <p>resolves to:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>http://data.okfn.org/data/core/gold-prices/datapackage.json
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://data.okfn.org/data/core/gold-prices/datapackage.json
+</code></pre></div>    </div>
   </li>
 </ul>
 
@@ -252,16 +248,6 @@ package.</p>
   anchors.options.icon = '#';
   anchors.add('h2, h3, h4, h5, h6');
 </script>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-8271754-41']);
-  _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
 </body>
 </html>

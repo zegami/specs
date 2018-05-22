@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title> 
+  <title>
     Data Packages Appendix - Frictionless Data - Open Knowledge International
   </title>
   <meta name="author" content="Open Knowledge International and others">
@@ -18,8 +18,12 @@
   <script src="//netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
   <link href="/css/style.css" rel="stylesheet" />
 
+  
+  
 
-
+  <!-- Consent manager -->
+  <script>var okiConsent = {analyticsTrackingID: 'UA-8271754-41'}</script>
+  <script src="https://a.okfn.org/html/oki/consent/assets/js/consent.js"></script>
 
 </head>
 <body>
@@ -50,7 +54,7 @@
         <li class="divider-vertical"></li>
         <li>
           <a href="http://frictionlessdata.io" title="Main Site">Main Site</a>
-        </li>        
+        </li>
 	
         <li class="divider-vertical"></li>
         <li>
@@ -222,13 +226,12 @@ should be present for each package.</p>
     <p>checksums - Hash of package checksums. This checksum is used by package
 manager tools to verify the integrity of a package. For example:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> checksums: {
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> checksums: {
    "md5": "841959b03e98c92d938cdeade9e0784d",
    "sha1": " f8919b549295a259a6cef5b06e7c86607a3c3ab7",
    "sha256": "1abb530034bc88162e8427245839ec17c5515e01a5dede6e702932bbebbfe8a7"
  }
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
 </ul>
 
@@ -240,16 +243,15 @@ manager tools to verify the integrity of a package. For example:</p>
 
 <p>Layout:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>meta.xml
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>meta.xml
 META-INF/
   manifest.xml
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>meta.xml contains the file metadata. For example, Author, “Last modified by”,
 date of last modification, etc. The contents look somewhat like this:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;meta:creation-date&gt;2003-09-10T15:31:11&lt;/meta:creation-date&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;meta:creation-date&gt;2003-09-10T15:31:11&lt;/meta:creation-date&gt;
 &lt;dc:creator&gt;Daniel Carrera&lt;/dc:creator&gt;
 &lt;dc:date&gt;2005-06-29T22:02:06&lt;/dc:date&gt;
 &lt;dc:language&gt;es-ES&lt;/dc:language&gt;
@@ -257,8 +259,7 @@ date of last modification, etc. The contents look somewhat like this:</p>
   page-count="59" paragraph-count="676"
   image-count="2" word-count="16701"
   character-count="98757"/&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>META-INF is a separate folder. Information about the files contained in the
 OpenDocument package is stored in an XML file called the manifest file. The
@@ -308,16 +309,6 @@ decrypt the file is stored in the manifest.</li>
   anchors.options.icon = '#';
   anchors.add('h2, h3, h4, h5, h6');
 </script>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-8271754-41']);
-  _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
 </body>
 </html>

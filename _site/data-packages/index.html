@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title> 
+  <title>
     Data Packages - Frictionless Data - Open Knowledge International
   </title>
   <meta name="author" content="Open Knowledge International and others">
@@ -18,8 +18,12 @@
   <script src="//netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
   <link href="/css/style.css" rel="stylesheet" />
 
+  
+  
 
-
+  <!-- Consent manager -->
+  <script>var okiConsent = {analyticsTrackingID: 'UA-8271754-41'}</script>
+  <script src="https://a.okfn.org/html/oki/consent/assets/js/consent.js"></script>
 
 </head>
 <body>
@@ -50,7 +54,7 @@
         <li class="divider-vertical"></li>
         <li>
           <a href="http://frictionlessdata.io" title="Main Site">Main Site</a>
-        </li>        
+        </li>
 	
         <li class="divider-vertical"></li>
         <li>
@@ -229,24 +233,22 @@ of data</strong>.</p>
 
 <p>A minimal data package on disk would be a directory containing a single file:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>datapackage.json  # (required) metadata and schemas for this data package
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>datapackage.json  # (required) metadata and schemas for this data package
+</code></pre></div></div>
 
 <p>Obviously lacking a single piece of actual data would make this of doubtful
 use. A slightly less minimal version would be:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>datapackage.json
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>datapackage.json
 # a data file (CSV in this case)
 data.csv
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Additional files such as a README, scripts (for processing or analyzing the
 data) and other material may be provided. By convention scripts go in a scripts
 directory and thus, a more elaborate data package could look like this:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>datapackage.json  # (required) metadata and schemas for this data package
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>datapackage.json  # (required) metadata and schemas for this data package
 README.md         # (optional) README in markdown format
 
 # data files may go either in data subdirectory or in main directory
@@ -255,8 +257,7 @@ data/otherdata.csv
 
 # the directory for code scripts - again these can go in the base directory
 scripts/my-preparation-script.py
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Several exemplar data packages can be found in the <a href="https://github.com/datasets">datasets organization on github</a>, including:</p>
 
@@ -288,23 +289,22 @@ metadata attributes, are described in the “Required Fields” section below.</
 
 <p>Here is an illustrative example of a datapackage JSON file:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="err">#</span><span class="w"> </span><span class="err">general</span><span class="w"> </span><span class="nt">"metadata"</span><span class="w"> </span><span class="err">like</span><span class="w"> </span><span class="err">title,</span><span class="w"> </span><span class="err">sources</span><span class="w"> </span><span class="err">etc</span><span class="w">
-  </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"a-unique-human-readable-and-url-usable-identifier"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"title"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"A nice title"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"license"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"The package's license"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"sources"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">],</span><span class="w">
-  </span><span class="err">#</span><span class="w"> </span><span class="err">list</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">data</span><span class="w"> </span><span class="err">resources</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">data</span><span class="w"> </span><span class="err">package</span><span class="w">
-  </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="err">...</span><span class="w"> </span><span class="err">resource</span><span class="w"> </span><span class="err">info</span><span class="w"> </span><span class="err">described</span><span class="w"> </span><span class="err">below</span><span class="w"> </span><span class="err">...</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="err">#</span><span class="w"> </span><span class="err">optional</span><span class="w">
-  </span><span class="err">...</span><span class="w"> </span><span class="err">additional</span><span class="w"> </span><span class="err">information</span><span class="w"> </span><span class="err">...</span><span class="w">
-</span><span class="err">}</span><span class="w">
-</span></code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  # general "metadata" like title, sources etc
+  "name" : "a-unique-human-readable-and-url-usable-identifier",
+  "title" : "A nice title",
+  "license" : "The package's license",
+  "sources" : [...],
+  # list of the data resources in this data package
+  "resources": [
+    {
+      ... resource info described below ...
+    }
+  ],
+  # optional
+  ... additional information ...
+}
+</code></pre></div></div>
 
 <h2 id="metadata">Metadata</h2>
 
@@ -355,9 +355,8 @@ an <a href="http://licenses.opendefinition.org/">Open Definition license ID</a> 
 <a href="http://opendefinition.org/licenses/">Open Definition approved</a>. An example of the string version
 is as follows:</p>
 
-        <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nt">"license"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ODC-PDDL-1.0"</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></code></pre>
-        </div>
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{ "license" : "ODC-PDDL-1.0" }
+</code></pre></div>        </div>
       </li>
     </ul>
 
@@ -366,12 +365,11 @@ linking to the actual text. The <code class="highlighter-rouge">type</code> SHOU
 <a href="http://licenses.opendefinition.org/">Open Definition license ID</a> if an ID exists for the license and
 otherwise may be the general license name or identifier. Here is an example:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  "license": {
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  "license": {
     "type": "ODC-PDDL-1.0",
     "url": "http://opendatacommons.org/licenses/pddl/"
   }
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
 </ul>
 
@@ -390,12 +388,11 @@ line break) should be usable as summary information for the package.</li>
   <li>
     <p><code class="highlighter-rouge">sources</code> - an array of source objects. Each source object may have <code class="highlighter-rouge">name</code>, <code class="highlighter-rouge">web</code> and <code class="highlighter-rouge">email</code> properties. Example:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>"sources": [{
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"sources": [{
   "name": "World Bank and OECD",
   "web": "http://data.worldbank.org/indicator/NY.GDP.MKTP.CD"
 }]
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p><code class="highlighter-rouge">author</code> and <code class="highlighter-rouge">contributors</code> - these are properties for describing people or
@@ -405,41 +402,36 @@ first contributor is the original author of the package unless <code class="high
 also present - in this sense, <code class="highlighter-rouge">author</code> is simply a convenience that allows
 for single line entries like the following:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>"author": "Joe Bloggs &lt;joe@bloggs.com&gt;"
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"author": "Joe Bloggs &lt;joe@bloggs.com&gt;"
+</code></pre></div>    </div>
 
     <p>A “person” or “organization” is an object OR string. It MUST contain a <code class="highlighter-rouge">name</code>
 property and MAY contain <code class="highlighter-rouge">web</code> and <code class="highlighter-rouge">email</code>. An example of the object structure
 is as follows:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Joe Bloggs"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"joe@bloggs.com"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"web"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.bloggs.com"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "name": "Joe Bloggs",
+  "email": "joe@bloggs.com",
+  "web": "http://www.bloggs.com"
+}
+</code></pre></div>    </div>
 
     <p>The string version has the following structure:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>NAME &lt;EMAIL&gt; (WEB)
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NAME &lt;EMAIL&gt; (WEB)
+</code></pre></div>    </div>
 
     <p>Example:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>Joe Bloggs &lt;joe@bloggs.com&gt; (http://www.bloggs.com/)
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Joe Bloggs &lt;joe@bloggs.com&gt; (http://www.bloggs.com/)
+</code></pre></div>    </div>
 
     <p>Email and web are optional in the string version as well e.g.:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>Joe Bloggs
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Joe Bloggs
 Joe Bloggs &lt;joe@bloggs.com&gt;
 Joe Bloggs (http://www.bloggs.com)
-</code></pre>
-    </div>
+</code></pre></div>    </div>
 
     <p>Note on semantics: use of the “author” property does not imply that that person
 was the original creator of the data in the data package - merely that they
@@ -468,7 +460,7 @@ group of dependencies which define a set of options, any one of which
 satisfies the dependency. The ordering of the group is significant and
 earlier entries have higher priority. Example:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>"dataDependencies": {
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"dataDependencies": {
    "country-codes": "",
    "unemployment": "2.1",
    "geo-boundaries": {
@@ -476,8 +468,7 @@ earlier entries have higher priority. Example:</p>
      "othercorp-geo-boundaries": "0.9.8",
    },
 }
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li><code class="highlighter-rouge">schemas</code>: an Object containing schemas keyed by a name. See the <a href="#resource-schemas">Resource
 Schemas</a> section below.</li>
@@ -489,13 +480,12 @@ listed in the specification here.  For example, suppose you were storing
 time series data and want to list the temporal coverage of the data in the
 Data Package you could add a property <code class="highlighter-rouge">temporal</code> (cf <a href="http://dublincore.org/documents/usageguide/qualifiers.shtml#temporal">Dublin Core</a>):</p>
 
-  <div class="highlighter-rouge"><pre class="highlight"><code>"temporal": {
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"temporal": {
   "name": "19th Century",
   "start": "1800-01-01",
   "end": "1899-12-31"
 }
-</code></pre>
-  </div>
+</code></pre></div>  </div>
 
   <p>This flexibility enables specific communities to extend Data Packages as
 appropriate for the data they manage. As an example, the <a href="/tabular-data-package/">Tabular Data
@@ -537,14 +527,13 @@ such as <code class="highlighter-rouge">../</code>).</p>
 
 <p>Examples:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># fully qualified url
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># fully qualified url
 "path": "http://ex.datapackages.org/big-csv/my-big.csv"
 
 # relative path
 # note: this will work both a relative path on disk and online
 "path": "my-data-directory/my-csv.csv"
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <div class="alert security">
   <p>SECURITY:  <code class="highlighter-rouge">/</code> (absolute path) and <code class="highlighter-rouge">../</code> (relative parent path) are forbidden to
@@ -578,9 +567,8 @@ would be inconvenient.</p>
 <p>To support this use case the <code class="highlighter-rouge">path</code> property MAY be an array of strings rather
 than a single string:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>"path": [ "myfile1.csv", "myfile2.csv" ]
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"path": [ "myfile1.csv", "myfile2.csv" ]
+</code></pre></div></div>
 
 <p>It is NOT permitted to mix fully qualified URLs and relative paths in a <code class="highlighter-rouge">path</code>
 array: strings MUST either all be relative paths or all URLs.</p>
@@ -614,35 +602,33 @@ attribute is provided that the data is JSON and attempt to process it as such.</
 
 <p>Examples 1 - inline JSON:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-   </span><span class="err">...</span><span class="w">
-   </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-     </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"json"</span><span class="p">,</span><span class="w">
-        </span><span class="err">#</span><span class="w"> </span><span class="err">some</span><span class="w"> </span><span class="err">json</span><span class="w"> </span><span class="err">data</span><span class="w"> </span><span class="err">e.g.</span><span class="w"> 
-        </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-           </span><span class="p">{</span><span class="w"> </span><span class="nt">"a"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">"b"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">},</span><span class="w">
-           </span><span class="p">{</span><span class="w"> </span><span class="err">....</span><span class="w"> </span><span class="p">}</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-     </span><span class="p">}</span><span class="w">
-   </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+   ...
+   "resources": [
+     {
+        "format": "json",
+        # some json data e.g. 
+        "data": [
+           { "a": 1, "b": 2 },
+           { .... }
+        ]
+     }
+   ]
+}
+</code></pre></div></div>
 
 <p>Example 2 - inline CSV:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-   </span><span class="err">...</span><span class="w">
-   </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-     </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"csv"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A,B,C\n1,2,3\n4,5,6"</span><span class="w">
-     </span><span class="p">}</span><span class="w">
-   </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+   ...
+   "resources": [
+     {
+        "format": "csv",
+        "data": "A,B,C\n1,2,3\n4,5,6"
+     }
+   ]
+}
+</code></pre></div></div>
 
 <h3 id="recommended-fields-1">Recommended Fields</h3>
 
@@ -682,9 +668,8 @@ extension for this type of resource.</li>
     <p><code class="highlighter-rouge">hash</code>: the MD5 hash for this resource. Other algorithms can be indicated by prefixing
 the hash’s value with the algorithm name in lower-case. For example:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>"hash": "sha1:8843d7f92416211de9ebb963ff4ce28125932878"
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"hash": "sha1:8843d7f92416211de9ebb963ff4ce28125932878"
+</code></pre></div>    </div>
   </li>
   <li><code class="highlighter-rouge">schema</code>: a schema or a pointer to the schema for the resource - see below
 for more on this attribute</li>
@@ -743,34 +728,32 @@ specifying an appropriate schema.</p>
 
 <h4 id="examples">Examples</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-    </span><span class="err">...</span><span class="w">
-      </span><span class="nt">"schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://url-to/datapackage.json#schemas/schema-name"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="err">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-</span><span class="err">...</span><span class="w">
-</span><span class="err">}</span><span class="w">
-</span></code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "resources": [
+    {
+    ...
+      "schema": "http://url-to/datapackage.json#schemas/schema-name"
+      }
+    }
+  ],
+...
+}
+</code></pre></div></div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-    </span><span class="err">...</span><span class="w">
-      </span><span class="nt">"schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xyz-schema"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"schemas"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"xyz-schema"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="err">schema</span><span class="w"> </span><span class="err">goes</span><span class="w"> </span><span class="err">here</span><span class="w"> </span><span class="err">...</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "resources": [
+    {
+    ...
+      "schema": "xyz-schema"
+    }
+  ],
+  "schemas": {
+    "xyz-schema": {
+      schema goes here ...
+    }
+  }
+}
+</code></pre></div></div>
 
 <h2 id="mediatype">MediaType</h2>
 
@@ -845,16 +828,6 @@ download and upload material</li>
   anchors.options.icon = '#';
   anchors.add('h2, h3, h4, h5, h6');
 </script>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-8271754-41']);
-  _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
 </body>
 </html>
